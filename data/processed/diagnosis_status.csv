@@ -1,0 +1,5 @@
+status,prevalence_pct,estimated_people,source_ref
+Has known diabetes,5.58,1096103,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 27
+Has newly diagnosed diabetes,0.9,185767,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 28
+At high risk of diabetes,4.85,952641,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 29
+Normal HbA1c no diabetes,88.63,17418562,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 30

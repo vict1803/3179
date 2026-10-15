@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 220,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/waffle.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.col)+1",
+      "as": "right"
+    },
+    {
+      "calculate": "toNumber(datum.row)+1",
+      "as": "bottom"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "#f5f4ee",
+    "strokeWidth": 1.0,
+    "cornerRadius": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "quantitative",
+      "title": null,
+      "axis": null,
+      "scale": {
+        "domain": [
+          0,
+          50
+        ],
+        "nice": false
+      }
+    },
+    "x2": {
+      "field": "right"
+    },
+    "y": {
+      "field": "row",
+      "type": "quantitative",
+      "title": null,
+      "axis": null,
+      "scale": {
+        "domain": [
+          20,
+          0
+        ],
+        "nice": false
+      }
+    },
+    "y2": {
+      "field": "bottom"
+    },
+    "color": {
+      "field": "status",
+      "scale": {
+        "domain": [
+          "Known diabetes",
+          "Newly diagnosed diabetes",
+          "Not classified with diabetes"
+        ],
+        "range": [
+          "#715496",
+          "#b88a22",
+          "#dfe5df"
+        ]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "status",
+        "type": "nominal",
+        "title": "Classification"
+      },
+      {
+        "field": "cell_pct",
+        "type": "quantitative",
+        "title": "Each square represents (%)",
+        "format": ".1f"
+      }
+    ]
+  }
+}

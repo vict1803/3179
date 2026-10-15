@@ -1,0 +1,174 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 310,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/socioeconomic.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "params": [
+    {
+      "name": "sexPick",
+      "value": "All"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.sex != 'Persons'"
+    },
+    {
+      "filter": "sexPick == 'All' || datum.sex == sexPick"
+    },
+    {
+      "calculate": "replace(replace(datum.group, ' (most disadvantaged)', ''), ' (least disadvantaged)', '')",
+      "as": "short_group"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "title": "Age-adjusted prevalence (%)",
+      "scale": {
+        "domain": [
+          0,
+          15
+        ]
+      }
+    },
+    "y": {
+      "field": "short_group",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Group 1",
+        "Group 2",
+        "Group 3",
+        "Group 4",
+        "Group 5"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#c6cdc6",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "detail": {
+          "field": "group"
+        },
+        "order": {
+          "field": "prevalence_pct",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100
+      },
+      "encoding": {
+        "color": {
+          "field": "sex",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Males",
+              "Females"
+            ],
+            "range": [
+              "#376da5",
+              "#bd5b49"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Socioeconomic area"
+          },
+          {
+            "field": "sex",
+            "type": "nominal",
+            "title": "Sex"
+          },
+          {
+            "field": "prevalence_pct",
+            "type": "quantitative",
+            "title": "Age-adjusted prevalence (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "caution",
+            "type": "nominal",
+            "title": "Reliability note"
+          },
+          {
+            "field": "ci_low",
+            "type": "quantitative",
+            "title": "95% interval: low",
+            "format": ".1f"
+          },
+          {
+            "field": "ci_high",
+            "type": "quantitative",
+            "title": "95% interval: high",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

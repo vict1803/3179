@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "file": "01-waffle.vl.json",
+      "status": "pass",
+      "data_marks": 1000,
+      "svg_bytes": 729255
+    },
+    {
+      "file": "02-trend.vl.json",
+      "status": "pass",
+      "data_marks": 69,
+      "svg_bytes": 11287
+    },
+    {
+      "file": "03-survey-change.vl.json",
+      "status": "pass",
+      "data_marks": 8,
+      "svg_bytes": 9288
+    },
+    {
+      "file": "04-age-profile.vl.json",
+      "status": "pass",
+      "data_marks": 5,
+      "svg_bytes": 6966
+    },
+    {
+      "file": "05-age-sex.vl.json",
+      "status": "pass",
+      "data_marks": 11,
+      "svg_bytes": 12092
+    },
+    {
+      "file": "06-disadvantage.vl.json",
+      "status": "pass",
+      "data_marks": 22,
+      "svg_bytes": 17373
+    },
+    {
+      "file": "07-remoteness.vl.json",
+      "status": "pass",
+      "data_marks": 3,
+      "svg_bytes": 10778
+    },
+    {
+      "file": "08-risk-profile.vl.json",
+      "status": "pass",
+      "data_marks": 18,
+      "svg_bytes": 12090
+    },
+    {
+      "file": "09-rate-map.vl.json",
+      "status": "pass",
+      "data_marks": 9,
+      "svg_bytes": 49424
+    },
+    {
+      "file": "10-count-map.vl.json",
+      "status": "pass",
+      "data_marks": 19,
+      "svg_bytes": 53784
+    },
+    {
+      "file": "11-area-cartogram.vg.json",
+      "status": "pass",
+      "data_marks": 9,
+      "svg_bytes": 53621
+    },
+    {
+      "file": "12-test-classification.vg.json",
+      "status": "pass",
+      "data_marks": 14,
+      "svg_bytes": 4261
+    }
+  ],
+  "warnings": []
+}

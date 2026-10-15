@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 340,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/registered_trend.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "params": [
+    {
+      "name": "sexPick",
+      "value": "All"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "sexPick == 'All' || datum.sex == sexPick"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 2.8
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {
+        "format": "d",
+        "tickCount": 6
+      },
+      "scale": {
+        "nice": false
+      }
+    },
+    "y": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "title": "Age-adjusted prevalence (%)",
+      "scale": {
+        "zero": true
+      }
+    },
+    "color": {
+      "field": "sex",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Males",
+          "Females",
+          "Persons"
+        ],
+        "range": [
+          "#376da5",
+          "#bd5b49",
+          "#243d37"
+        ]
+      },
+      "legend": {
+        "title": null,
+        "orient": "top"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "quantitative",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "sex",
+        "type": "nominal",
+        "title": "Population"
+      },
+      {
+        "field": "prevalence_pct",
+        "type": "quantitative",
+        "title": "Age-adjusted prevalence (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "estimated_people",
+        "type": "quantitative",
+        "title": "Registered people",
+        "format": ",.0f"
+      }
+    ]
+  }
+}

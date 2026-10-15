@@ -1,0 +1,119 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 290,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/age_overall.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 115,
+    "color": "#17665a"
+  },
+  "encoding": {
+    "x": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "title": "Adults with diabetes (%)",
+      "scale": {
+        "domain": [
+          0,
+          20
+        ]
+      },
+      "axis": {
+        "tickCount": 5
+      }
+    },
+    "y": {
+      "field": "age_group",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "18–44",
+        "45–54",
+        "55–64",
+        "65–74",
+        "75+"
+      ],
+      "axis": {
+        "labelLimit": 100
+      }
+    },
+    "tooltip": [
+      {
+        "field": "age_group",
+        "type": "nominal",
+        "title": "Age"
+      },
+      {
+        "field": "prevalence_pct",
+        "type": "quantitative",
+        "title": "Prevalence (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "estimated_people",
+        "type": "quantitative",
+        "title": "Estimated people",
+        "format": ",.0f"
+      },
+      {
+        "field": "ci_low",
+        "type": "quantitative",
+        "title": "95% interval: low",
+        "format": ".1f"
+      },
+      {
+        "field": "ci_high",
+        "type": "quantitative",
+        "title": "95% interval: high",
+        "format": ".1f"
+      }
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 330,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/risk_profiles.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "factor",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "High blood pressure",
+        "Abnormal blood lipids",
+        "Overweight or obesity",
+        "Elevated waist circumference"
+      ],
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "width < 420 ? (datum.label == 'High blood pressure' ? ['Blood', 'pressure'] : datum.label == 'Abnormal blood lipids' ? ['Blood', 'lipids'] : datum.label == 'Overweight or obesity' ? ['Body', 'weight'] : ['Waist']) : split(datum.label, ' ')",
+        "labelLimit": 140,
+        "grid": true,
+        "gridColor": "#cbd6cb",
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "title": "Adults with this characteristic (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      },
+      "axis": {
+        "grid": false
+      }
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "With diabetes",
+          "Without diabetes"
+        ],
+        "range": [
+          "#243d37",
+          "#9aaba0"
+        ]
+      },
+      "legend": {
+        "title": null,
+        "orient": "top",
+        "columns": 1
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "profile",
+        "value": 1
+      },
+      "value": 0.15
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3
+      },
+      "params": [
+        {
+          "name": "profile",
+          "select": {
+            "type": "point",
+            "fields": [
+              "group"
+            ]
+          },
+          "bind": "legend"
+        }
+      ]
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 65
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "factor",
+            "type": "nominal",
+            "title": "Characteristic"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Population"
+          },
+          {
+            "field": "prevalence_pct",
+            "type": "quantitative",
+            "title": "Age-adjusted proportion (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "ci_low",
+            "type": "quantitative",
+            "title": "95% interval: low",
+            "format": ".1f"
+          },
+          {
+            "field": "ci_high",
+            "type": "quantitative",
+            "title": "95% interval: high",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

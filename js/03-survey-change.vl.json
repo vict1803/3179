@@ -1,0 +1,170 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 280,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/survey_change.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "(datum.status == 'Known diabetes' ? 'Known: ' : 'Newly detected: ') + format(toNumber(datum.prevalence_pct), '.1f') + '%'",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "period",
+      "type": "ordinal",
+      "sort": [
+        "2011–12",
+        "2022–24"
+      ],
+      "title": null,
+      "axis": {
+        "labelAngle": 0
+      },
+      "scale": {
+        "padding": 0.35
+      }
+    },
+    "y": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "title": "Age-adjusted prevalence (%)",
+      "scale": {
+        "domain": [
+          0,
+          6
+        ]
+      }
+    },
+    "color": {
+      "field": "status",
+      "scale": {
+        "domain": [
+          "Known diabetes",
+          "Newly diagnosed diabetes"
+        ],
+        "range": [
+          "#715496",
+          "#b88a22"
+        ]
+      },
+      "legend": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 65
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "period",
+            "type": "nominal",
+            "title": "Survey period"
+          },
+          {
+            "field": "status",
+            "type": "nominal",
+            "title": "Diagnosis status"
+          },
+          {
+            "field": "prevalence_pct",
+            "type": "quantitative",
+            "title": "Age-adjusted prevalence (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.period == '2022–24'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -15,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.period == '2011–12'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 19,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "prevalence_pct",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

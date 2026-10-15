@@ -1,0 +1,9 @@
+state_code,state,abbr,prevalence_pct,crude_pct,estimated_people,represented_adults,rse_pct,caution,lon,lat,tile_col,tile_row,source_ref
+1,New South Wales,NSW,4.9,5.6,347000,6219500,12.8,,146,-31.5,2,1,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 2
+2,Victoria,VIC,6.5,7.1,365900,5131100,14.8,,144.6,-37,2,2,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 3
+3,Queensland,QLD,5.7,6.3,253300,4012900,15.8,,144,-23,2,0,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 4
+4,South Australia,SA,8.4,9.1,128400,1407800,15.3,,135,-30,1,1,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 5
+5,Western Australia,WA,5.7,6.2,128700,2082800,13,,122,-25,0,1,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 6
+6,Tasmania,TAS,6.5,8,35500,444500,16.8,,146.7,-42,2,3,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 7
+7,Northern Territory,NT,6.4,6.2,9200,148100,,Precision not published,133,-19,1,0,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 8
+8,Australian Capital Territory,ACT,3.9,3.9,13700,351800,24.6,,149.1,-35.4,3,2,NHMSDC04.xlsx | 4.3 row 39; 4.1 row 38; 4.2 row 38 | state column 9

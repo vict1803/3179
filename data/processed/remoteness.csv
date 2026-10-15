@@ -1,0 +1,10 @@
+group,order,sex,prevalence_pct,ci_low,ci_high,caution,rse_pct,source_ref
+Major cities,1,Males,7.08,5.5,8.7,,9.5118487462,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 121, column 14"
+Major cities,1,Females,4.56,3.4,5.8,,11.812986266,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 121, column 16"
+Major cities,1,Persons,5.77,4.8,6.8,,6.9666847269,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 121, column 18"
+Inner regional,2,Males,7.26,3.6,10.9,,17.373033494,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 122, column 14"
+Inner regional,2,Females,2.96,1.6,4.3,Use with caution,25.393011133,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 122, column 16"
+Inner regional,2,Persons,5.18,3.2,7.2,,13.387545304,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 122, column 18"
+Outer regional and remote,3,Males,12.84,7.9,17.8,Use with caution,26.47226845,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 123, column 14"
+Outer regional and remote,3,Females,4.26,2.0,6.5,Use with caution,27.184854964,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 123, column 16"
+Outer regional and remote,3,Persons,7.95,5.4,10.5,,20.206508924,"AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 123, column 18"

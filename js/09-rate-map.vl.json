@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 390,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/geo/australia_states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "params": [
+    {
+      "name": "statePick",
+      "value": "All"
+    }
+  ],
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "center": [
+      0,
+      -27
+    ]
+  },
+  "transform": [
+    {
+      "lookup": "properties.state_code",
+      "from": {
+        "data": {
+          "url": "data/processed/states.csv"
+        },
+        "key": "state_code",
+        "fields": [
+          "state",
+          "abbr",
+          "prevalence_pct",
+          "estimated_people",
+          "caution",
+          "crude_pct"
+        ]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#f5f4ee",
+    "strokeWidth": 1.3
+  },
+  "encoding": {
+    "color": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          3,
+          9
+        ],
+        "range": [
+          "#e0e9ce",
+          "#17665a"
+        ]
+      },
+      "legend": {
+        "title": "Age-adjusted (%)",
+        "orient": "bottom",
+        "gradientLength": 220
+      }
+    },
+    "opacity": {
+      "condition": {
+        "test": "statePick == 'All' || datum.abbr == statePick",
+        "value": 1
+      },
+      "value": 0.22
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State / territory"
+      },
+      {
+        "field": "prevalence_pct",
+        "type": "quantitative",
+        "title": "Age-adjusted prevalence (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "crude_pct",
+        "type": "quantitative",
+        "title": "Unadjusted prevalence (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "caution",
+        "type": "nominal",
+        "title": "Precision note"
+      }
+    ]
+  }
+}

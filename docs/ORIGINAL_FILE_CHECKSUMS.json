@@ -1,0 +1,57 @@
+[
+  {
+    "file": "AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx",
+    "sha256": "dd7d96397d4f410391f60c62260de015b4ca27e8ae814090697554e4cda65cd5",
+    "bytes": 640466
+  },
+  {
+    "file": "Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx",
+    "sha256": "07945f27dadde697b5e4c94ce81d98f5b6223fe0993a409f7848150b63ef58e0",
+    "bytes": 7118
+  },
+  {
+    "file": "NHMSDC13.xlsx",
+    "sha256": "ffb83d56d431c07658d00703ffc08ab9528af72a1ffd6f22567c7104e09a280c",
+    "bytes": 61413
+  },
+  {
+    "file": "NHMSDC26.xlsx",
+    "sha256": "02ffab9a96ee29b64fa31f944a7aa1894e28b91816cf27346a1c9d252e0d863c",
+    "bytes": 50332
+  },
+  {
+    "file": "Figure 4_ Prevalence of diabetes among people aged 18 and over, .csv",
+    "sha256": "895dd5e90d9030ad3d74a5b7a8c314fba19096dd5af99b133a064a1655aa8e0d",
+    "bytes": 214
+  },
+  {
+    "file": "NHMSDC10.xlsx",
+    "sha256": "7424bcc238299e9a596a99f9a250a38652839e21bd8df37549ffd0c06bac959e",
+    "bytes": 55894
+  },
+  {
+    "file": "Figure 4_ Prevalence of diabetes among people aged 18 and over, -2.csv",
+    "sha256": "f2526d54ea471b943a016d3b2515fb27c4f1ba87045c385452e30e31a4d21dee",
+    "bytes": 289
+  },
+  {
+    "file": "NHMSDC04.xlsx",
+    "sha256": "d8d80698484e73d7146649a11f30154c9752948d1bd639b3b31f6a2959bd4138",
+    "bytes": 59018
+  },
+  {
+    "file": "diabetes_age_sex.csv",
+    "sha256": "cd5fb181f673cb553d775986260635233de479bd19ecc27ef9cfeacb86ea4150",
+    "bytes": 181
+  },
+  {
+    "file": "Figure 3_ Prevalence of self-reported diabetes from the National.csv",
+    "sha256": "dac99f950bf1416637002f44c1eee320b25b33bd5cc3ece3cb9f55c43d6aa2d3",
+    "bytes": 580
+  },
+  {
+    "file": "NHMSDC11.xlsx",
+    "sha256": "f5616a460c61aaa9ede2ee563018496eb6c5e43e95aa96e610803ecc0fd14679",
+    "bytes": 92520
+  }
+]

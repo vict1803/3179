@@ -1,0 +1,10 @@
+hba1c,fpg,percent,caution,source_ref
+Diabetes,Diabetes,5.8,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 4, column 3"
+Diabetes,At high risk,0.3,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 4, column 4"
+Diabetes,No diabetes,0.3,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 4, column 5"
+At high risk,Diabetes,0.3,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 5, column 3"
+At high risk,At high risk,0.9,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 5, column 4"
+At high risk,No diabetes,3.7,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 5, column 5"
+No diabetes,Diabetes,0.1,Use with caution,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 6, column 3"
+No diabetes,At high risk,1.4,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 6, column 4"
+No diabetes,No diabetes,85,,"Comparison of diabetes prevalence (FPG) and diabetes prevalence (HbA1c), persons aged 18 years and over(a).xlsx | Sheet1 | row 6, column 5"

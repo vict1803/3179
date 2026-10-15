@@ -1,0 +1,11 @@
+age_group,sex,prevalence_pct,ci_low,ci_high,rse_pct,caution,estimated_people,period,source_ref
+18–44,Males,2.5,1.0,4.0,30.829354502,Use with caution,115380,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 6; CSV Figure 1
+18–44,Females,1.1,0.3,1.8,34.880446123,Use with caution,50327,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 6; CSV Figure 1
+45–54,Males,9.5,4.2,14.8,27.924228617,Use with caution,148661,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 7; CSV Figure 1
+45–54,Females,4.2,1.6,6.8,30.953921671,Use with caution,67629,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 7; CSV Figure 1
+55–64,Males,13.4,9.2,17.6,15.904382804,,187422,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 8; CSV Figure 1
+55–64,Females,10.6,6.9,14.2,17.216002073,,161770,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 8; CSV Figure 1
+65–74,Males,18.4,13.7,23.1,12.803621758,,208512,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 9; CSV Figure 1
+65–74,Females,8.1,5.6,10.6,15.217667826,,100955,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 9; CSV Figure 1
+75+,Males,17.1,12.1,22.0,14.432062238,,144153,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 10; CSV Figure 1
+75+,Females,10.5,4.6,16.5,28.780447588,Use with caution,97063,2022–24,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Diabetes prevalence | row 10; CSV Figure 1

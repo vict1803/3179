@@ -1,0 +1,5 @@
+status,period,prevalence_pct,source_ref
+Known diabetes,2011–12,4,"NHMSDC26.xlsx | Table 26.3_Proportions | row 43, column 4"
+Known diabetes,2022–24,4.8,"NHMSDC26.xlsx | Table 26.3_Proportions | row 43, column 5"
+Newly diagnosed diabetes,2011–12,0.8,"NHMSDC26.xlsx | Table 26.3_Proportions | row 44, column 4"
+Newly diagnosed diabetes,2022–24,1,"NHMSDC26.xlsx | Table 26.3_Proportions | row 44, column 5"

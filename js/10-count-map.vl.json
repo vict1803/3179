@@ -1,0 +1,197 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 390,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/states.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "params": [
+    {
+      "name": "statePick",
+      "value": "All"
+    }
+  ],
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "center": [
+      0,
+      -27
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/geo/australia_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e1e5dd",
+        "stroke": "#f5f4ee",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "color": "#596a60",
+        "opacity": 0.72,
+        "stroke": "#fff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative",
+          "title": null
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative",
+          "title": null
+        },
+        "size": {
+          "field": "estimated_people",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              400000
+            ],
+            "range": [
+              0,
+              4300
+            ]
+          },
+          "legend": {
+            "title": "Estimated adults",
+            "orient": "bottom",
+            "values": [
+              20000,
+              100000,
+              350000
+            ],
+            "format": "~s"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "statePick == 'All' || datum.abbr == statePick",
+            "value": 1
+          },
+          "value": 0.22
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "estimated_people",
+            "type": "quantitative",
+            "title": "Estimated adults with diabetes",
+            "format": ",.0f"
+          },
+          {
+            "field": "caution",
+            "type": "nominal",
+            "title": "Precision note"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 0,
+        "fontSize": 10,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative",
+          "title": null
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative",
+          "title": null
+        },
+        "text": {
+          "field": "abbr"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.abbr == 'NT' || datum.abbr == 'ACT'",
+            "value": "#243d37"
+          },
+          "value": "#fff"
+        },
+        "opacity": {
+          "condition": {
+            "test": "statePick == 'All' || datum.abbr == statePick",
+            "value": 1
+          },
+          "value": 0.22
+        }
+      }
+    }
+  ]
+}

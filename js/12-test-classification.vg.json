@@ -1,0 +1,291 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 660,
+  "height": 300,
+  "padding": {
+    "top": 30,
+    "left": 0,
+    "right": 0,
+    "bottom": 5
+  },
+  "background": "transparent",
+  "signals": [
+    {
+      "name": "lx",
+      "update": "width*0.18"
+    },
+    {
+      "name": "rx",
+      "update": "width*0.82"
+    }
+  ],
+  "data": [
+    {
+      "name": "links",
+      "values": [
+        {
+          "a": "Diabetes",
+          "b": "Diabetes",
+          "percent": 5.8,
+          "caution": "",
+          "sy": 10.0,
+          "ty": 10.0,
+          "h": 101.953125
+        },
+        {
+          "a": "Diabetes",
+          "b": "At high risk",
+          "percent": 0.3,
+          "caution": "",
+          "sy": 111.953125,
+          "ty": 134.984375,
+          "h": 5.2734375
+        },
+        {
+          "a": "Diabetes",
+          "b": "No diabetes",
+          "percent": 0.3,
+          "caution": "",
+          "sy": 117.2265625,
+          "ty": 196.6875,
+          "h": 5.2734375
+        },
+        {
+          "a": "At high risk",
+          "b": "Diabetes",
+          "percent": 0.3,
+          "caution": "",
+          "sy": 138.5,
+          "ty": 111.953125,
+          "h": 5.2734375
+        },
+        {
+          "a": "At high risk",
+          "b": "At high risk",
+          "percent": 0.9,
+          "caution": "",
+          "sy": 143.7734375,
+          "ty": 140.2578125,
+          "h": 15.8203125
+        },
+        {
+          "a": "At high risk",
+          "b": "No diabetes",
+          "percent": 3.7,
+          "caution": "",
+          "sy": 159.59375,
+          "ty": 201.9609375,
+          "h": 65.0390625
+        },
+        {
+          "a": "No diabetes",
+          "b": "Diabetes",
+          "percent": 0.1,
+          "caution": "Use with caution",
+          "sy": 240.6328125,
+          "ty": 117.2265625,
+          "h": 1.7578125
+        },
+        {
+          "a": "No diabetes",
+          "b": "At high risk",
+          "percent": 1.4,
+          "caution": "",
+          "sy": 242.390625,
+          "ty": 156.078125,
+          "h": 24.609375
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "values": [
+        {
+          "side": "left",
+          "label": "Diabetes",
+          "y": 10,
+          "y2": 122.49999999999999
+        },
+        {
+          "side": "left",
+          "label": "At high risk",
+          "y": 138.5,
+          "y2": 224.6328125
+        },
+        {
+          "side": "left",
+          "label": "No diabetes",
+          "y": 240.6328125,
+          "y2": 267.0
+        },
+        {
+          "side": "right",
+          "label": "Diabetes",
+          "y": 10,
+          "y2": 118.984375
+        },
+        {
+          "side": "right",
+          "label": "At high risk",
+          "y": 134.984375,
+          "y2": 180.6875
+        },
+        {
+          "side": "right",
+          "label": "No diabetes",
+          "y": 196.6875,
+          "y2": 267.0
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {
+        "data": "links"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#c7d5c8"
+          }
+        },
+        "update": {
+          "path": {
+            "signal": "'M'+(lx+10)+','+datum.sy+' C'+(width*0.48)+','+datum.sy+' '+(width*0.52)+','+datum.ty+' '+rx+','+datum.ty+' L'+rx+','+(datum.ty+datum.h)+' C'+(width*0.52)+','+(datum.ty+datum.h)+' '+(width*0.48)+','+(datum.sy+datum.h)+' '+(lx+10)+','+(datum.sy+datum.h)+' Z'"
+          },
+          "tooltip": {
+            "signal": "{'HbA1c classification':datum.a,'FPG classification':datum.b,'Eligible adults (%)':datum.percent,'Reliability':datum.caution}"
+          }
+        },
+        "hover": {
+          "fill": {
+            "value": "#17665a"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.side == 'left' ? lx : rx"
+          },
+          "width": {
+            "value": 10
+          },
+          "y": {
+            "field": "y"
+          },
+          "y2": {
+            "field": "y2"
+          },
+          "fill": {
+            "value": "#243d37"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.side == 'left' ? lx-8 : rx+18"
+          },
+          "y": {
+            "signal": "(datum.y+datum.y2)/2"
+          },
+          "text": {
+            "field": "label"
+          },
+          "align": {
+            "signal": "datum.side == 'left' ? 'right' : 'left'"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#243d37"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "lx"
+          },
+          "y": {
+            "value": -12
+          },
+          "text": {
+            "value": "HbA1c test"
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#243d37"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "rx"
+          },
+          "y": {
+            "value": -12
+          },
+          "text": {
+            "value": "Fasting glucose test"
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#243d37"
+          }
+        }
+      }
+    }
+  ]
+}

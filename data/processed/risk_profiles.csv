@@ -1,0 +1,9 @@
+group,factor,order,prevalence_pct,ci_low,ci_high,source_ref
+With diabetes,High blood pressure,0,35.36,19.1,51.6,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R7:S7
+With diabetes,Abnormal blood lipids,1,81.15,69.0,93.3,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R8:S8
+With diabetes,Overweight or obesity,2,87.63,76.8,98.4,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R10:S10
+With diabetes,Elevated waist circumference,3,92.38,84.2,100.6,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R11:S11
+Without diabetes,High blood pressure,0,21.9,20.1,23.7,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R13:S13
+Without diabetes,Abnormal blood lipids,1,56.66,54.4,58.9,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R14:S14
+Without diabetes,Overweight or obesity,2,65.36,63.3,67.5,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R16:S16
+Without diabetes,Elevated waist circumference,3,65.8,64.0,67.7,AIHW-CVD-96-Diabetes-facts-data-tables-27052026.xlsx | Risk factors | R17:S17

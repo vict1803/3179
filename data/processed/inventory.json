@@ -1,0 +1,216 @@
+[
+  {
+    "file": "age_sex.csv",
+    "source": "AIHW Diabetes prevalence Table 1 / supplied Figure 1 CSV",
+    "period": "2022–24",
+    "population": "Adults 18+",
+    "definition": "NHMS: HbA1c + self-reported diagnosis/medication",
+    "measure": "Age-specific prevalence (%)",
+    "rows": 10,
+    "fields": [
+      "age_group",
+      "sex",
+      "prevalence_pct",
+      "ci_low",
+      "ci_high",
+      "rse_pct",
+      "caution",
+      "estimated_people",
+      "period",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "age_overall.csv",
+    "source": "AIHW Diabetes prevalence Table 1",
+    "period": "2022–24",
+    "population": "Adults 18+",
+    "definition": "NHMS: HbA1c + self-report",
+    "measure": "Age-specific prevalence (%)",
+    "rows": 5,
+    "fields": [
+      "age_group",
+      "prevalence_pct",
+      "estimated_people",
+      "ci_low",
+      "ci_high",
+      "rse_pct",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "registered_trend.csv",
+    "source": "AIHW Diabetes prevalence Table 4",
+    "period": "2000–2021",
+    "population": "Registered population; all ages",
+    "definition": "Linked NDSS/APEG registered diabetes; excludes gestational diabetes",
+    "measure": "Age-standardised prevalence (%) and published counts",
+    "rows": 66,
+    "fields": [
+      "year",
+      "sex",
+      "estimated_people",
+      "prevalence_pct",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "self_reported_trend.csv",
+    "source": "Supplied AIHW Figure 3 CSV (retained for comparison, not plotted)",
+    "period": "2001–2022",
+    "population": "NHS survey population",
+    "definition": "Self-reported diagnosed diabetes",
+    "measure": "Age-standardised prevalence (%)",
+    "rows": 18,
+    "fields": [
+      "period",
+      "sex",
+      "prevalence_pct"
+    ]
+  },
+  {
+    "file": "remoteness.csv",
+    "source": "AIHW Diabetes prevalence Table 6",
+    "period": "2022–24",
+    "population": "Adults 18+; very remote excluded",
+    "definition": "NHMS: HbA1c + self-report",
+    "measure": "Age-standardised prevalence (%)",
+    "rows": 9,
+    "fields": [
+      "group",
+      "order",
+      "sex",
+      "prevalence_pct",
+      "ci_low",
+      "ci_high",
+      "caution",
+      "rse_pct",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "socioeconomic.csv",
+    "source": "AIHW Diabetes prevalence Table 6",
+    "period": "2022–24",
+    "population": "Adults 18+; very remote excluded",
+    "definition": "NHMS: HbA1c + self-report",
+    "measure": "Age-standardised prevalence (%)",
+    "rows": 15,
+    "fields": [
+      "group",
+      "order",
+      "sex",
+      "prevalence_pct",
+      "ci_low",
+      "ci_high",
+      "caution",
+      "rse_pct",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "survey_change.csv",
+    "source": "ABS NHMS Table 26.3",
+    "period": "2011–12 and 2022–24",
+    "population": "Adults 18+; fasting sample",
+    "definition": "FPG + self-report; same measure in both periods",
+    "measure": "Age-standardised prevalence (%)",
+    "rows": 4,
+    "fields": [
+      "status",
+      "period",
+      "prevalence_pct",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "states.csv",
+    "source": "ABS NHMS Tables 4.1, 4.2, 4.3",
+    "period": "2022–24",
+    "population": "Adults 18+; survey coverage exclusions apply",
+    "definition": "HbA1c + self-reported diagnosis/medication",
+    "measure": "Age-standardised rate (%); published estimates in thousands converted to people",
+    "rows": 8,
+    "fields": [
+      "state_code",
+      "state",
+      "abbr",
+      "prevalence_pct",
+      "crude_pct",
+      "estimated_people",
+      "represented_adults",
+      "rse_pct",
+      "caution",
+      "lon",
+      "lat",
+      "tile_col",
+      "tile_row",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "risk_profiles.csv",
+    "source": "AIHW Risk factors Table 1",
+    "period": "2022–24",
+    "population": "Adults 18+; measure-specific denominators",
+    "definition": "NHMS: HbA1c + self-report",
+    "measure": "Age-standardised risk-factor prevalence (%)",
+    "rows": 8,
+    "fields": [
+      "group",
+      "factor",
+      "order",
+      "prevalence_pct",
+      "ci_low",
+      "ci_high",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "waffle.csv",
+    "source": "AIHW Diabetes prevalence Tables 1–2; national rounded 5.6% and 0.9%",
+    "period": "2022–24",
+    "population": "Adults 18+",
+    "definition": "NHMS: HbA1c + self-report",
+    "measure": "Approximate unit display; each square = 0.1 percentage point",
+    "rows": 1000,
+    "fields": [
+      "cell",
+      "col",
+      "row",
+      "status",
+      "cell_pct"
+    ]
+  },
+  {
+    "file": "diagnosis_status.csv",
+    "source": "AIHW Diabetes prevalence Table 2",
+    "period": "2022–24",
+    "population": "Adults 18+",
+    "definition": "NHMS: HbA1c + self-report",
+    "measure": "Crude prevalence (%)",
+    "rows": 4,
+    "fields": [
+      "status",
+      "prevalence_pct",
+      "estimated_people",
+      "source_ref"
+    ]
+  },
+  {
+    "file": "test_classification.csv",
+    "source": "ABS NHMS FPG/HbA1c comparison table",
+    "period": "2022–24",
+    "population": "Adults 18+ with a fasting sample",
+    "definition": "Cross-classification by HbA1c and FPG",
+    "measure": "Joint percentages of eligible population; reported pairs total 97.8%",
+    "rows": 9,
+    "fields": [
+      "hba1c",
+      "fpg",
+      "percent",
+      "caution",
+      "source_ref"
+    ]
+  }
+]

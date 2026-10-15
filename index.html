@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An illustrated data story about diabetes prevalence in Australia: historical change, age, sex, disadvantage and geography.">
+  <title>Diabetes in Australia — An unequal picture</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="vendor/vega.min.js"></script>
+  <script defer src="vendor/vega-lite.min.js"></script>
+  <script defer src="vendor/vega-embed.min.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the data story</a>
+<div class="file-warning" id="file-warning" hidden>Static preview mode. For interactive charts, run <code>python3 serve.py</code> in this folder, or use VS Code Live Server. The README has instructions.</div>
+<header class="masthead wrap"><span class="wordmark">DIABETES (PUBLIC HEALTH) IN AUSTRALIA</span><span> Data Story By Victoria Tay Wen Xie</span></header>
+<main id="story" class="wrap">
+  <section class="hero">
+    <p class="eyebrow">DIABETES IN AUSTRALIA</p>
+    <h1>An unequal<br><em>picture.</em></h1>
+    <div class="hero-bottom"><p class="standfirst">Diabetes has changed over time.<br>But its impact is far from uniform.</p><p class="intro">Follow the national trend, then explore how prevalence differs by age, sex, disadvantage and place.</p></div>
+    <div class="hero-facts" aria-label="Key findings">
+      <div><strong>6.5<span>%</span></strong><p>of adults had diabetes<br>in the 2022–24 survey.</p></div>
+      <div><strong>13.7<span>%</span></strong><p>prevalence among adults<br>aged 75 and over.</p></div>
+      <div><strong>3.5<span>×</span></strong><p>the age-adjusted rate in<br>the most disadvantaged areas.*</p></div>
+    </div>
+    <p class="source-line">Source: AIHW, NHMS analysis, 2022–24. *Compared with the least disadvantaged areas. Figures are rounded survey estimates.</p>
+  </section>
+
+  <section class="chapter" id="national">
+    <header class="chapter-heading"><span class="chapter-number">01</span><div><p class="eyebrow">THE NATIONAL PICTURE</p><h2>More than a diagnosis.</h2></div></header>
+    <article class="story-row">
+      <div class="prose"><h3>Some cases emerge through testing.</h3><p>About <strong>1 in 15 adults</strong> had diabetes in 2022–24. This includes people with known diabetes and cases newly detected through the survey.</p><p>“Newly diagnosed” here means detected by survey testing. It does not measure every new case arising that year.</p><div class="key-list"><span><i class="swatch known"></i>Known diabetes <b>5.6%</b></span><span><i class="swatch new"></i>Newly diagnosed <b>0.9%</b></span><span><i class="swatch none"></i>Not classified with diabetes <b>93.5%</b></span></div></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">01 / WAFFLE</span><h4>The adult population, in 1,000 squares</h4><p>Each square represents approximately 0.1% of adults.</p></figcaption><div id="chart-01" class="chart" role="img" aria-label="Waffle chart: 5.6 percent known diabetes and 0.9 percent newly diagnosed."></div><p class="chart-note">A population illustration, not individual people. Rounded categories sum to 100%; published unrounded components may differ slightly.</p></figure>
+    </article>
+    <article class="story-row">
+      <div class="prose"><h3>Counts and rates tell different stories.</h3><p>The registered population grew from about <strong>460,000 to 1.31 million</strong> between 2000 and 2021.</p><p>Age-adjusted prevalence rose earlier, then remained broadly stable from around 2011. A growing count does not imply the same growth in the adjusted rate.</p><p class="definition"><b>Age-adjusted</b> means allowing for differences in population age. It supports fairer comparisons.</p><label class="control">Show in the trend chart<select id="trend-mode"><option value="prevalence_pct">Age-adjusted prevalence (%)</option><option value="estimated_people">Registered people</option></select></label><label class="control">Compare sex across linked charts<select id="sex-filter"><option>All</option><option>Males</option><option>Females</option></select></label></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">02 / HISTORICAL TREND</span><h4>Registered diabetes, 2000–2021</h4><p>Use the control to compare the rate with the count.</p></figcaption><div id="chart-02" class="chart" role="img" aria-label="Historical line chart of registered diabetes by sex from 2000 to 2021."></div><p class="chart-note">AIHW analysis of linked NDSS/APEG registers; all ages. Registration does not capture all diagnosed or undiagnosed cases. This series is separate from the adult survey estimates above.</p></figure>
+    </article>
+    <article class="story-row compact">
+      <div class="prose"><h3>A second view of change.</h3><p>In the fasting-glucose survey comparison, age-adjusted <strong>known diabetes rose from 4.0% to 4.8%</strong>.</p><p>The newly detected estimate changed from 0.8% to 1.0%. These point estimates alone do not establish a significant increase.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">03 / SLOPE GRAPH</span><h4>Known and newly detected diabetes</h4><p>Same FPG definition; two survey periods.</p></figcaption><div id="chart-03" class="chart" role="img" aria-label="Slope graph comparing known and newly diagnosed diabetes in 2011–12 and 2022–24."></div><p class="chart-note">ABS Table 26.3, age-standardised percentages. FPG means fasting plasma glucose. Sampling, methods and survey participation affect comparability.</p></figure>
+    </article>
+  </section>
+
+  <section class="chapter" id="people">
+    <header class="chapter-heading"><span class="chapter-number">02</span><div><p class="eyebrow">WHO IS MOST AFFECTED?</p><h2>Age changes the picture.</h2></div></header>
+    <article class="story-row">
+      <div class="prose"><h3>Prevalence is higher at older ages.</h3><p>About <strong>1.8%</strong> of adults aged 18–44 had diabetes, compared with <strong>13.7%</strong> of those aged 75 and over.</p><p>These are percentages within each age group. They do not describe the share of all diabetes cases belonging to that group.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">04 / AGE PROFILE</span><h4>Diabetes prevalence within each age group</h4><p>All adults, 2022–24 · HbA1c-based definition.</p></figcaption><div id="chart-04" class="chart" role="img" aria-label="Dot plot of overall diabetes prevalence by age group."></div><p class="chart-note">Published Persons estimates from AIHW Table 1. Male and female percentages have not been averaged. Hover for the published uncertainty interval.</p></figure>
+    </article>
+    <article class="story-row">
+      <div class="prose"><h3>Look inside the age groups.</h3><p>Male point estimates exceed female estimates in every age group shown. The male estimate peaks at ages <strong>65–74</strong>.</p><p>The colour encodes prevalence only. Sex is shown by column position, avoiding a second colour meaning.</p><p class="quiet">Some estimates have large sampling errors. Use the reliability notes in the tooltips; avoid treating every gap as statistically significant.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">05 / AGE × SEX HEATMAP</span><h4>Older groups have darker cells</h4><p>Adults aged 18+, 2022–24. Linked sex control applies.</p></figcaption><div id="chart-05" class="chart" role="img" aria-label="Heatmap comparing age groups and sex using diabetes prevalence."></div><p class="chart-note">Caution: both sexes aged 18–44 and 45–54, and females aged 75+, have relative standard errors of 25–50%. Confidence intervals and flags were recovered from the supplied AIHW workbook.</p></figure>
+    </article>
+  </section>
+
+  <section class="chapter" id="inequality">
+    <header class="chapter-heading"><span class="chapter-number">03</span><div><p class="eyebrow">POPULATION DIFFERENCES</p><h2>Beyond age alone.</h2></div></header>
+    <article class="story-row">
+      <div class="prose"><h3>A substantial disadvantage gradient.</h3><p>Age-adjusted prevalence was <strong>10.3%</strong> in the most disadvantaged areas and <strong>2.9%</strong> in the least disadvantaged areas.</p><p>That is around <strong>3.5 times as high</strong>. The connected points show the male–female gap within each group.</p><p class="quiet">Groups describe areas, not an individual's income. Group 1 is most disadvantaged; Group 5 is least disadvantaged.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">06 / CONNECTED DOT PLOT</span><h4>Disadvantage and sex, viewed together</h4><p>Age-adjusted prevalence, 2022–24.</p></figcaption><div id="chart-06" class="chart" role="img" aria-label="Connected dot plot of diabetes prevalence by disadvantage and sex."></div><p class="chart-note">AIHW Table 6; socioeconomic groups are IRSD population quintiles. Some underlying group estimates have large relative standard errors; flags are retained in the data and tooltips.</p></figure>
+    </article>
+    <article class="story-row">
+      <div class="prose"><h3>Place also matters.</h3><p>The combined outer-regional and remote category has the highest point estimate among these three groups: <strong>8.0%</strong>, after accounting for age.</p><p>Combining these areas can hide important differences. Very remote communities are excluded from this survey comparison.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">07 / REMOTENESS</span><h4>City, regional and remote populations</h4><p>Age-adjusted prevalence, 2022–24 · Persons.</p></figcaption><div id="chart-07" class="chart" role="img" aria-label="Bar chart comparing diabetes prevalence across remoteness categories."></div><p class="chart-note">AIHW Table 6. Point estimates should be read with their uncertainty. This is a regional-category comparison, not a map of individual communities.</p></figure>
+    </article>
+    <article class="story-row">
+      <div class="prose"><h3>Health characteristics cluster.</h3><p>Adults with diabetes also had higher point estimates for these four health characteristics. Age adjustment reduces differences due to population age.</p><p>Follow one line across the four axes. Every axis measures a percentage, making the profiles comparable.</p><p class="quiet">These are associations, not proof of cause. The blood-pressure difference was not statistically significant in AIHW's analysis. Click a legend entry to focus on a profile.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">08 / PARALLEL COORDINATES</span><h4>Two population profiles, four characteristics</h4><p>Age-adjusted percentages, 2022–24.</p></figcaption><div id="chart-08" class="chart" role="img" aria-label="Parallel coordinates comparing health characteristics among adults with and without diabetes."></div><p class="chart-note">AIHW Risk factors Table 1. Denominators differ by measure. “Abnormal blood lipids” refers to dyslipidaemia; it includes abnormal cholesterol or triglycerides, or lipid-lowering medication.</p></figure>
+    </article>
+  </section>
+
+  <section class="chapter" id="geography">
+    <header class="chapter-heading"><span class="chapter-number">04</span><div><p class="eyebrow">THE GEOGRAPHICAL PICTURE</p><h2>Higher rates. Larger counts.<br>Different questions.</h2></div></header>
+    <div class="map-toolbar"><label for="state-filter">Highlight a state or territory</label><select id="state-filter"><option>All</option><option>NSW</option><option>VIC</option><option>QLD</option><option>SA</option><option>WA</option><option>TAS</option><option>NT</option><option>ACT</option></select><button type="button" id="reset-state">Reset</button><p id="state-summary" aria-live="polite">Hover over a region for its estimate. The control highlights all three maps.</p></div>
+    <article class="story-row">
+      <div class="prose"><h3>Compare rates fairly.</h3><p>The choropleth uses <strong>age-adjusted percentages</strong>, rather than raw counts. Larger land areas therefore do not automatically mean more affected people.</p><p>South Australia's point estimate is 8.4%; the ACT's is 3.9%. Survey uncertainty means these should not be read as exact rankings.</p><p class="definition">The map uses an equal-area conic projection suited to Australia. Very remote areas and discrete Aboriginal and Torres Strait Islander communities are outside NHMS coverage.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">09 / CHOROPLETH MAP</span><h4>Diabetes prevalence by state and territory</h4><p>Adults aged 18+, 2022–24 · HbA1c-based definition.</p></figcaption><div id="chart-09" class="chart map" role="img" aria-label="Australian state choropleth map of age-adjusted diabetes prevalence."></div><p class="chart-note">ABS Table 4.3; simplified ABS ASGS 2021 state boundaries. Small territories can be difficult to see here; the cartogram below provides a second geographical view. No estimate for Other Territories is mapped.</p></figure>
+    </article>
+    <article class="story-row">
+      <div class="prose"><h3>Now count affected adults.</h3><p>Circle <strong>area</strong> represents the estimated number of adults with diabetes. These counts come directly from published survey estimates.</p><p>Victoria and New South Wales have large counts. That tells a different story from comparing the proportion affected.</p><p class="quiet">Symbols sit inside the regions they represent; they are not clinic locations or individual cases. NT precision was not published in the source RSE table.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">10 / PROPORTIONAL SYMBOL MAP</span><h4>Where more affected adults live</h4><p>Published affected-person estimates, 2022–24.</p></figcaption><div id="chart-10" class="chart map" role="img" aria-label="Proportional symbol map of estimated adults with diabetes in each Australian state."></div><p class="chart-note">ABS Table 4.1 estimates in thousands converted to people; counts were not reconstructed by multiplying age-adjusted rates by population. Larger circles represent larger counts, not higher prevalence.</p></figure>
+    </article>
+    <article class="story-row">
+      <div class="prose"><h3>Resize the regions around people.</h3><p>Western Australia looks large on a conventional map. Here, Victoria becomes larger because its estimated affected population is larger.</p><p>Each shape's <strong>area represents affected-person counts</strong>. Colour adds a different measure: age-adjusted prevalence, on the same scale as the choropleth.</p><p class="quiet">Shapes are uniformly resized and repositioned. Their rough geographic order remains, but distances and adjacency are schematic. NT's estimate excludes very remote populations and has no published precision measure here.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">11 / NON-CONTIGUOUS AREA CARTOGRAM</span><h4>Land area gives way to affected population</h4><p>Shape area: estimated adults · colour: age-adjusted prevalence.</p></figcaption><div id="chart-11" class="chart map" role="img" aria-label="Non-contiguous area cartogram with Australian state shapes resized in proportion to affected-person counts and coloured by prevalence."></div><p class="chart-note">ABS Tables 4.1 and 4.3. Shape area is proportional to published counts, after equal-area projection. Generalised mainland shapes are preserved; positions are schematic. No health estimates are modified by resizing.</p></figure>
+    </article>
+  </section>
+
+  <section class="chapter" id="measurement">
+    <header class="chapter-heading"><span class="chapter-number">05</span><div><p class="eyebrow">READING THE ESTIMATES</p><h2>How we measure matters.</h2></div></header>
+    <article class="story-row">
+      <div class="prose"><h3>Two tests can classify adults differently.</h3><p>HbA1c and fasting glucose measure different aspects of blood sugar. This diagram links the classifications of the <strong>same survey participants</strong>.</p><p>To reveal the smaller groups, the diagram omits the <strong>85.0%</strong> classified as “no diabetes” by both methods.</p><p class="quiet">These bands are cross-classifications, not changes over time or patient journeys. Hover for each joint percentage.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">12 / ALLUVIAL COMPARISON</span><h4>When test classifications differ</h4><p>Band width represents the reported joint percentage.</p></figcaption><div id="chart-12" class="chart" role="img" aria-label="Alluvial diagram connecting HbA1c and fasting-glucose classifications, excluding the 85 percent normal by both tests."></div><p class="chart-note">ABS comparison table, fasting-sample adults aged 18+. Shown bands total 12.8% of eligible adults. Reported pairs including the omitted 85.0% total 97.8%, not 100%; unavailable results and confidential adjustment affect totals. The 0.1% band has a high margin of error. Node heights describe only the displayed subset.</p></figure>
+    </article>
+    <div class="closing"><p class="eyebrow">THE TAKEAWAY</p><h2>A national condition.<br>An uneven distribution.</h2><p>Diabetes prevalence varies across age groups, population characteristics and places. Read every estimate alongside its population, period and definition.</p></div>
+  </section>
+
+  <section class="sources" id="sources"><h2>Sources &amp; reading notes</h2><div class="source-columns"><div><h3>Health data</h3><p><a href="https://www.aihw.gov.au/reports/diabetes/diabetes/data">Australian Institute of Health and Welfare — Diabetes: Australian facts</a>, May 2026 data tables. Includes NHMS 2022–24 analysis and NDSS/APEG registration trends through 2021.</p><p><a href="https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-measures-survey/latest-release">Australian Bureau of Statistics — National Health Measures Survey, 2022–24</a>, released 2025. Tables 4 and 26, plus the FPG/HbA1c cross-classification.</p><p><a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS ASGS Edition 3 state boundaries, 2021</a>. Generalised for display. © Commonwealth of Australia, CC BY 4.0.</p></div><div><h3>Interpret with care</h3><p>Prevalence measures people living with diabetes. Incidence measures newly arising cases. Survey-detected cases are not an annual incidence series.</p><p>The health surveys, registration data, crude percentages and age-adjusted rates are separate measures. They have not been joined into a single time series.</p><p>Sex categories follow the source's sex-at-birth reporting. Survey exclusions, missing results and small samples limit coverage and precision.</p><p>Tooltips retain reliability information. Blank or suppressed cells are never replaced with zero.</p></div></div><p class="authorship">Built by Victoria Tay Wen Xie · 15 October 2026.</p>
+    <!-- EDIT AI DECLARATION: change only the wording inside the paragraph below. -->
+    <div class="ai-declaration" id="ai-declaration">
+      <h3>AI declaration</h3>
+      <p id="ai-declaration-text">OpenAI ChatGPT supported author by refining code, wording, spacing and design.</p>
+    </div></section>
+</main>
+<footer class="wrap footer"><span>DIABETES IN AUSTRALIA</span><a href="#story">Back to top ↑</a></footer>
+<noscript><p class="wrap">Enable JavaScript to display the interactive charts. Source citations are listed at the bottom of this page.</p></noscript>
+</body>
+</html>

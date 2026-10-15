@@ -1,0 +1,114 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 660,
+  "height": 245,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/processed/remoteness.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "domain": false,
+      "tickColor": "#c7d0c8",
+      "gridColor": "#e1e6df",
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#45564e",
+      "titleColor": "#45564e",
+      "symbolStrokeWidth": 3
+    },
+    "title": {
+      "font": "Arial",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "start",
+      "offset": 18,
+      "color": "#243d37"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.sex == 'Persons'"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "#17665a",
+    "cornerRadiusEnd": 3,
+    "height": 25
+  },
+  "encoding": {
+    "x": {
+      "field": "prevalence_pct",
+      "type": "quantitative",
+      "title": "Age-adjusted prevalence (%)",
+      "scale": {
+        "domain": [
+          0,
+          10
+        ]
+      }
+    },
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Major cities",
+        "Inner regional",
+        "Outer regional and remote"
+      ],
+      "axis": {
+        "labelLimit": 150,
+        "labelExpr": "datum.label === 'Outer regional and remote' ? ['Outer regional', 'and remote'] : datum.label"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "group",
+        "type": "nominal",
+        "title": "Remoteness"
+      },
+      {
+        "field": "prevalence_pct",
+        "type": "quantitative",
+        "title": "Age-adjusted prevalence (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "ci_low",
+        "type": "quantitative",
+        "title": "95% interval: low",
+        "format": ".1f"
+      },
+      {
+        "field": "ci_high",
+        "type": "quantitative",
+        "title": "95% interval: high",
+        "format": ".1f"
+      }
+    ]
+  }
+}
