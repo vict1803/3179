@@ -12,11 +12,53 @@
   "signals": [
     {
       "name": "lx",
-      "update": "width*0.18"
+      "update": "width * (width < 420 ? 0.26 : 0.18)"
     },
     {
       "name": "rx",
-      "update": "width*0.82"
+      "update": "width * (width < 420 ? 0.74 : 0.82)"
+    },
+    {
+      "name": "selectedNode",
+      "value": null,
+      "on": [
+        {
+          "events": "@categoryNodes:click, @categoryLabels:click",
+          "update": "selectedNode && selectedNode.side == datum.side && selectedNode.label == datum.label ? null : {side: datum.side, label: datum.label}"
+        }
+      ]
+    },
+    {
+      "name": "hoverNode",
+      "value": null,
+      "on": [
+        {
+          "events": "@categoryNodes:pointerover, @categoryLabels:pointerover",
+          "update": "{side: datum.side, label: datum.label}"
+        },
+        {
+          "events": "@categoryNodes:pointerout, @categoryLabels:pointerout",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "hoverLink",
+      "value": null,
+      "on": [
+        {
+          "events": "@flowBands:pointerover",
+          "update": "{a: datum.a, b: datum.b}"
+        },
+        {
+          "events": "@flowBands:pointerout",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "focusNode",
+      "update": "hoverNode || selectedNode"
     }
   ],
   "data": [
@@ -95,6 +137,18 @@
           "ty": 156.078125,
           "h": 24.609375
         }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "as": "pair",
+          "expr": "datum.a + ':' + datum.b"
+        },
+        {
+          "type": "formula",
+          "as": "agreement",
+          "expr": "datum.a == datum.b ? 'Same classification' : 'Different classification'"
+        }
       ]
     },
     {
@@ -136,6 +190,13 @@
           "y": 196.6875,
           "y2": 267.0
         }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "as": "key",
+          "expr": "datum.side + ':' + datum.label"
+        }
       ]
     }
   ],
@@ -146,25 +207,29 @@
         "data": "links"
       },
       "encode": {
-        "enter": {
-          "fill": {
-            "value": "#c7d5c8"
-          }
-        },
         "update": {
           "path": {
             "signal": "'M'+(lx+10)+','+datum.sy+' C'+(width*0.48)+','+datum.sy+' '+(width*0.52)+','+datum.ty+' '+rx+','+datum.ty+' L'+rx+','+(datum.ty+datum.h)+' C'+(width*0.52)+','+(datum.ty+datum.h)+' '+(width*0.48)+','+(datum.sy+datum.h)+' '+(lx+10)+','+(datum.sy+datum.h)+' Z'"
           },
           "tooltip": {
-            "signal": "{'HbA1c classification':datum.a,'FPG classification':datum.b,'Eligible adults (%)':datum.percent,'Reliability':datum.caution}"
-          }
-        },
-        "hover": {
+            "signal": "{'HbA1c classification': datum.a, 'FPG classification': datum.b, 'Agreement': datum.agreement, 'Eligible adults (%)': format(datum.percent, '.1f'), 'Reliability': datum.caution || 'No caution flag supplied'}"
+          },
           "fill": {
-            "value": "#17665a"
+            "scale": "agreementColour",
+            "field": "agreement"
+          },
+          "opacity": {
+            "signal": "hoverLink ? (datum.a == hoverLink.a && datum.b == hoverLink.b ? 1 : 0.12) : focusNode ? ((focusNode.side == 'left' ? datum.a : datum.b) == focusNode.label ? 0.95 : 0.12) : 0.8"
+          },
+          "stroke": {
+            "value": "#243d37"
+          },
+          "strokeWidth": {
+            "signal": "hoverLink && datum.a == hoverLink.a && datum.b == hoverLink.b ? 1 : 0"
           }
         }
-      }
+      },
+      "name": "flowBands"
     },
     {
       "type": "rect",
@@ -187,9 +252,25 @@
           },
           "fill": {
             "value": "#243d37"
+          },
+          "opacity": {
+            "signal": "(hoverLink ? datum.label == (datum.side == 'left' ? hoverLink.a : hoverLink.b) : !focusNode || (datum.side == focusNode.side ? datum.label == focusNode.label : indata('links', 'pair', focusNode.side == 'left' ? focusNode.label + ':' + datum.label : datum.label + ':' + focusNode.label))) ? 1 : 0.3"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Test': datum.side == 'left' ? 'HbA1c' : 'Fasting glucose', 'Classification': datum.label, 'Action': 'Select to highlight connected bands; select again to clear'}"
+          },
+          "stroke": {
+            "value": "#243d37"
+          },
+          "strokeWidth": {
+            "signal": "selectedNode && datum.side == selectedNode.side && datum.label == selectedNode.label ? 2 : 0"
           }
         }
-      }
+      },
+      "name": "categoryNodes"
     },
     {
       "type": "text",
@@ -221,9 +302,19 @@
           },
           "fill": {
             "value": "#243d37"
+          },
+          "opacity": {
+            "signal": "(hoverLink ? datum.label == (datum.side == 'left' ? hoverLink.a : hoverLink.b) : !focusNode || (datum.side == focusNode.side ? datum.label == focusNode.label : indata('links', 'pair', focusNode.side == 'left' ? focusNode.label + ':' + datum.label : datum.label + ':' + focusNode.label))) ? 1 : 0.3"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Test': datum.side == 'left' ? 'HbA1c' : 'Fasting glucose', 'Classification': datum.label, 'Action': 'Select to highlight connected bands; select again to clear'}"
           }
         }
-      }
+      },
+      "name": "categoryLabels"
     },
     {
       "type": "text",
@@ -286,6 +377,20 @@
           }
         }
       }
+    }
+  ],
+  "scales": [
+    {
+      "name": "agreementColour",
+      "type": "ordinal",
+      "domain": [
+        "Same classification",
+        "Different classification"
+      ],
+      "range": [
+        "#5261a6",
+        "#c65c86"
+      ]
     }
   ]
 }

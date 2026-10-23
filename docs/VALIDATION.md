@@ -1,4 +1,4 @@
-# Validation record — 15 October 2026
+# Validation record — updated 23 October 2026
 
 ## Completed checks
 
@@ -17,18 +17,20 @@
 
 Machine-readable chart results are in `chart-validation-results.json`. This records the headless chart runs, not a browser test.
 
-## Verification limits and remaining user actions
+## Integrated browser checks - 23 October 2026
 
-The complete HTML/CSS page has **not been exercised in a browser in this environment**. Chart rendering and signal checks were performed with the actual Vega runtimes, with separate visual inspection of rendered charts. Before submission, open the interactive version locally and check the final page at your laptop's width, tooltips, legend interactions and native dropdown controls. The static preview is a fallback, not a substitute for the interactive GitHub Pages check.
+The integrated version was checked in a browser with all 12 SVG charts present and no chart-error elements. Checks covered sticky navigation and active-section updates, anchor jumps, the 1,000-square waffle reveal and Replay, linked state buttons, map selections, enlarged-map tooltips, zoom/Fit map, dialog closing with Escape and restored chart placement. A 375px viewport was checked for page overflow and dialog fit. Caption/plot alignment was checked after restoring enlarged maps.
 
-GitHub Pages has not been published or verified. The required original hand-drawn sketch is not included; see `sketch/README.md`. Submission URLs in the draft description therefore remain placeholders. Tutor marking of idiom effectiveness and the final classification count cannot be guaranteed by automated checks.
+The delivered bundle was checked again headlessly after packaging preparation; the machine-readable results accompany this file. The original source files retain their recorded SHA-256 values. These checks do not substitute for checking the final public GitHub Pages URL on the submission device.
 
-## Typography and dashboard-cleanup update
+## Content retained
 
-- Headings use Arial/Helvetica/sans-serif; body paragraphs use Times New Roman/Times/serif. Chart labels and controls remain sans-serif.
-- Body and supporting paragraph sizes were adjusted for the new typeface; short paragraph widths and shared grid edges are retained. The main heading scales down further on narrow screens.
-- All 12 CSV/JSON download-link groups were removed from the dashboard HTML. Footer implementation-document links were removed. External data-source citations remain.
-- The numerical-table creation function and invocation were removed from JavaScript; tables are not merely hidden.
-- The AI declaration now has its own marked HTML block, `id="ai-declaration-text"`. See EDITING_GUIDE.md.
-- Original health data files and all 12 chart specifications remain in the project.
-- Full browser-page layout verification remains outstanding; alignment was checked at the CSS/grid-rule level, not certified by a browser screenshot.
+Headings remain sans-serif and body paragraphs Times New Roman. The user's HTML/CSS comments and visible AI declaration are retained. CSV/JSON download links and numerical tables remain removed from the visible dashboard; the underlying files remain available to the charts. The waffle retains 1,000 squares, each representing 0.1 percentage point, with 56 known, 9 newly diagnosed and 935 other squares.
+
+## Remaining submission actions
+
+GitHub Pages has not been published or verified. The required original hand-drawn sketch is not included; see `sketch/README.md`. Submission URLs in the draft description remain placeholders. Review the AI acknowledgement for accuracy and complete the submission materials.
+
+## Alluvial update — 23 October 2026
+
+All 12 charts rendered again at the default width and at 430px/290px without Vega warnings. Browser checks confirmed the two agreement colours, category-label clicks, dropdown selection on both sides, band hover and joint-percentage tooltip, endpoint highlighting, Reset, and the 220ms opacity transition. A 375px content viewport had no horizontal page overflow and the fasting-glucose selection correctly isolated two connected bands. The underlying link/node values, health data and original commented style.css were compared with the preceding ZIP and remain unchanged.

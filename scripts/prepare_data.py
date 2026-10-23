@@ -44,6 +44,13 @@ def save(name, rows, source, population, period, definition, measure):
         population=population, definition=definition, measure=measure,
         rows=len(rows), fields=keys))
 
+def waffle_rows():
+    """1,000 display cells; each represents 0.1 percentage point, not a person."""
+    return [dict(cell=i, col=i % 50, row=i // 50,
+        status=('Known diabetes' if i < 56 else
+                'Newly diagnosed diabetes' if i < 65 else
+                'Not classified with diabetes'), cell_pct=0.1) for i in range(1000)]
+
 def main():
     OUT.mkdir(exist_ok=True, parents=True)
     p = sheet(AIHW, 'Diabetes prevalence')
@@ -139,13 +146,11 @@ def main():
                 source_ref=f'{AIHW} | Risk factors | R{row}:S{row}'))
     save('risk_profiles.csv',rows,'AIHW Risk factors Table 1','Adults 18+; measure-specific denominators',
          '2022–24','NHMS: HbA1c + self-report','Age-standardised risk-factor prevalence (%)')
-    # Waffle uses rounded published national proportions; cells are approximate, not individuals.
-    rows=[]
-    for i in range(1000):
-        status='Known diabetes' if i<56 else 'Newly diagnosed diabetes' if i<65 else 'Not classified with diabetes'
-        rows.append(dict(cell=i,col=i%50,row=i//50,status=status,cell_pct=0.1))
+    # Each square represents 0.1%; 56 known, 9 newly diagnosed and 935 other cells.
+    rows=waffle_rows()
     save('waffle.csv',rows,'AIHW Diabetes prevalence Tables 1–2; national rounded 5.6% and 0.9%',
-         'Adults 18+','2022–24','NHMS: HbA1c + self-report','Approximate unit display; each square = 0.1 percentage point')
+         'Adults 18+','2022–24','NHMS: HbA1c + self-report',
+         'Approximate unit display; each square = 0.1 percentage point')
     # Keep a compact source table alongside the display grid.
     save('diagnosis_status.csv',[dict(status=cell(p,i,1),prevalence_pct=number(cell(p,i,12)),
          estimated_people=cell(p,i,4),source_ref=f'{AIHW} | Diabetes prevalence | row {i}') for i in range(27,31)],

@@ -1,6 +1,5 @@
 /* Buildless, local-asset Vega/Vega-Lite embedding. No account or network dependency. */
 'use strict';
-/* the list of charts to create */
 const charts = [
  ['01','01-waffle.vl.json','diagnosis_status.csv'],
  ['02','02-trend.vl.json','registered_trend.csv'],
@@ -15,9 +14,33 @@ const charts = [
  ['11','11-area-cartogram.vg.json','states.csv'],
  ['12','12-test-classification.vg.json','test_classification.csv']
 ];
-/*These will remember the dashboard's current setting, views store the rendered, interactive charts using their IDs*/
 const views = new Map();
 let sex = 'All', state = 'All', metric = 'prevalence_pct';
+// Retain an alluvial category selection when charts resize.
+let alluvialSelection = null;
+function connectAlluvialControls(view) {
+ const select = document.getElementById('alluvial-focus');
+ const reset = document.getElementById('alluvial-reset');
+ const status = document.getElementById('alluvial-status');
+ if (!select || !reset || !status) return;
+ function reflectSelection(value) {
+  alluvialSelection = value;
+  select.value = value ? `${value.side}:${value.label}` : '';
+  status.textContent = value
+   ? `Highlighting ${value.side === 'left' ? 'HbA1c' : 'fasting glucose'}: ${value.label}.`
+   : 'All displayed bands highlighted.';
+  reset.disabled = !value;
+ }
+ select.disabled = false;
+ reflectSelection(view.signal('selectedNode'));
+ view.addSignalListener('selectedNode', (name, value) => reflectSelection(value));
+ select.onchange = () => {
+  const split = select.value.indexOf(':');
+  const value = split < 0 ? null : {side: select.value.slice(0, split), label: select.value.slice(split + 1)};
+  view.signal('hoverNode', null).signal('hoverLink', null).signal('selectedNode', value).runAsync();
+ };
+ reset.onclick = () => view.signal('hoverNode', null).signal('hoverLink', null).signal('selectedNode', null).runAsync();
+}
 async function renderChart([id,file]) {
  const target=document.getElementById(`chart-${id}`);
  try {
@@ -26,25 +49,24 @@ async function renderChart([id,file]) {
   spec.width=Math.max(260,Math.floor(target.clientWidth));
   if(id==='11')spec.height=Math.round(spec.width*.71);
   if(spec.params)for(const p of spec.params){if(p.name==='sexPick')p.value=sex;if(p.name==='statePick')p.value=state;}
-  if(spec.signals)for(const signal of spec.signals)if(signal.name==='statePick')signal.value=state;
+  if(spec.signals)for(const signal of spec.signals){
+   if(signal.name==='statePick')signal.value=state;
+   if(id==='12' && signal.name==='selectedNode')signal.value=alluvialSelection;
+  }
   if(id==='02' && metric==='estimated_people'){
    spec.encoding.y={field:'estimated_people',type:'quantitative',title:'Registered people',scale:{zero:true},axis:{format:'~s'}};
   }
-  const previous=views.get(id);
-  /*This is where the active cleanup happens */
-  if(previous)previous.finalize();
+  const previous=views.get(id);if(previous)previous.finalize();
   const result=await vegaEmbed(target,spec,{actions:false,renderer:'svg',tooltip:true,loader:vega.loader({baseURL:new URL('./',location.href).href})});
   views.set(id,result.view);
+  if(id==='12')connectAlluvialControls(result.view);
  } catch(error) {
   target.replaceChildren();const p=document.createElement('p');p.className='chart-error';
   p.textContent='This chart could not load. Open the folder through the included local server or GitHub Pages, then refresh the page.';
   target.append(p); console.error(`Chart ${id}:`,error);
  }
 }
-async function updateSignals(ids,name,value)
-{await Promise.all(ids.map(async id=>{const view=views.get(id);
-    if(view)await view.signal(name,value).runAsync();}));}
-/*It is to set up the dashboard */
+async function updateSignals(ids,name,value){await Promise.all(ids.map(async id=>{const view=views.get(id);if(view)await view.signal(name,value).runAsync();}));}
 async function main(){
  if(location.protocol==='file:'){
   document.getElementById('file-warning').hidden=false;

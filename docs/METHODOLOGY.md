@@ -38,7 +38,7 @@ ABS publication tables and AIHW later microdata analysis can differ slightly bec
 3. Read numeric values separately from `*`/`#` flags, preserving the flags as caution fields. Retain RSE/CI values when available. `np` remains unavailable, never zero.
 4. Remove wholly blank placeholder rows from the supporting self-report CSV without inventing intermediate observations. Annual registered values come directly from the workbook.
 5. Convert ABS Table 4.1's thousands to people by multiplying by 1,000. No count is derived from an age-standardised rate.
-6. For the waffle, represent rounded national 5.6% known and 0.9% newly diagnosed as 56 and 9 of 1,000 cells, respectively. The remaining 935 cells are the complement, including high-risk and other adults not classified with diabetes. This is approximate display rounding, not synthetic participants.
+6. The waffle retains a 50-by-20 grid of 1,000 squares. Each square represents 0.1 percentage point: 56 known diabetes squares (5.6%), 9 newly diagnosed squares (0.9%), and 935 not classified with diabetes (93.5%). These are display units, not synthetic participants. The complement includes high-risk and other adults not classified with diabetes.
 7. Ratios and narrative values use the appropriate published estimates: 10.25 / 2.91 ≈ 3.5 for the most/least disadvantaged age-adjusted comparison. 1,308,091 / 460,180 ≈ 2.84 for growth in registered counts. Narratives distinguish point estimates from significance claims.
 
 ## Geography and maps

@@ -4,7 +4,7 @@ The story: **How diabetes prevalence has changed, who is more affected, and how 
 
 | # | Idiom | Classification | Source | Question and rationale |
 | --- | --- | --- | --- | --- |
-| 1 | Waffle | Advanced | AIHW Diabetes prevalence Tables 1–2, NHMS 2022–24 | How common is known or survey-detected diabetes? Repeated equal units give an accessible national overview. |
+| 1 | Waffle | Advanced | AIHW Diabetes prevalence Tables 1–2, NHMS 2022–24 | How common is known or survey-detected diabetes? A 1,000-cell grid gives a national overview: 56 known and 9 newly diagnosed squares represent 5.6% and 0.9%. |
 | 2 | Multi-line chart, with count/rate toggle | Basic | AIHW Diabetes prevalence Table 4, NDSS/APEG 2000–2021 | Did counts and age-adjusted prevalence change alike? A single axis at a time preserves interpretability. |
 | 3 | Slope graph | Advanced | ABS NHMS Table 26.3, FPG 2011–12 vs 2022–24 | Which diagnosis-status estimates changed between the two surveys? Endpoint comparison, with status labels instead of a separate legend. |
 | 4 | Dot plot | Basic | AIHW Diabetes prevalence Table 1, Persons | How does overall prevalence differ by age? Common-position encoding supports accurate comparisons. |

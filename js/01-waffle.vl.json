@@ -61,7 +61,7 @@
   "mark": {
     "type": "rect",
     "stroke": "#f5f4ee",
-    "strokeWidth": 1.0,
+    "strokeWidth": 1,
     "cornerRadius": 1
   },
   "encoding": {
@@ -99,6 +99,7 @@
     },
     "color": {
       "field": "status",
+      "type": "nominal",
       "scale": {
         "domain": [
           "Known diabetes",

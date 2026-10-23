@@ -8,11 +8,13 @@
   <link rel="stylesheet" href="style.css">
   <!-- Additional chart alignment and selection transitions; keep style.css. -->
   <link rel="stylesheet" href="chart-enhancements.css">
+  <link rel="stylesheet" href="story-interactions.css">
   <script defer src="vendor/vega.min.js"></script>
   <script defer src="vendor/vega-lite.min.js"></script>
   <script defer src="vendor/vega-embed.min.js"></script>
   <script defer src="js/app.js"></script>
   <script defer src="js/chart-enhancements.js"></script>
+  <script defer src="js/story-interactions.js"></script>
 </head>
 <body>
 <a class="skip" href="#story">Skip to the data story</a>
@@ -99,8 +101,31 @@
   <section class="chapter" id="measurement">
     <header class="chapter-heading"><span class="chapter-number">05</span><div><p class="eyebrow">READING THE ESTIMATES</p><h2>How we measure matters.</h2></div></header>
     <article class="story-row">
-      <div class="prose"><h3>Two tests can classify adults differently.</h3><p>HbA1c and fasting glucose measure different aspects of blood sugar. This diagram links the classifications of the <strong>same survey participants</strong>.</p><p>To reveal the smaller groups, the diagram omits the <strong>85.0%</strong> classified as “no diabetes” by both methods.</p><p class="quiet">These bands are cross-classifications, not changes over time or patient journeys. Hover for each joint percentage.</p></div>
-      <figure class="chart-block"><figcaption><span class="chart-no">12 / ALLUVIAL COMPARISON</span><h4>When test classifications differ</h4><p>Band width represents the reported joint percentage.</p></figcaption><div id="chart-12" class="chart" role="img" aria-label="Alluvial diagram connecting HbA1c and fasting-glucose classifications, excluding the 85 percent normal by both tests."></div><p class="chart-note">ABS comparison table, fasting-sample adults aged 18+. Shown bands total 12.8% of eligible adults. Reported pairs including the omitted 85.0% total 97.8%, not 100%; unavailable results and confidential adjustment affect totals. The 0.1% band has a high margin of error. Node heights describe only the displayed subset.</p></figure>
+      <div class="prose"><h3>Two tests can classify adults differently.</h3><p>HbA1c and fasting glucose measure different aspects of blood sugar. This diagram links the classifications of the <strong>same survey participants</strong>.</p><p>To reveal the smaller groups, the diagram omits the <strong>85.0%</strong> classified as “no diabetes” by both methods.</p><p class="quiet">These bands compare classifications, rather than changes over time. Colours show whether the tests agree. Hover over a band, or select a category to follow its connections.</p></div>
+      <figure class="chart-block"><figcaption><span class="chart-no">12 / ALLUVIAL COMPARISON</span><h4>When test classifications differ</h4><p>Band width represents the reported joint percentage.</p></figcaption><!-- Alluvial agreement key and keyboard-accessible category highlighting. -->
+        <div class="alluvial-key" aria-label="Agreement colours for displayed bands">
+          <span><i class="alluvial-swatch agreement-same" aria-hidden="true"></i>Same classification</span>
+          <span><i class="alluvial-swatch agreement-different" aria-hidden="true"></i>Different classification</span>
+        </div>
+        <div class="alluvial-controls">
+          <label for="alluvial-focus">Highlight connections</label>
+          <select id="alluvial-focus" aria-controls="chart-12" disabled>
+            <option value="">All displayed bands</option>
+            <optgroup label="HbA1c test">
+              <option value="left:Diabetes">HbA1c: Diabetes</option>
+              <option value="left:At high risk">HbA1c: At high risk</option>
+              <option value="left:No diabetes">HbA1c: No diabetes</option>
+            </optgroup>
+            <optgroup label="Fasting glucose test">
+              <option value="right:Diabetes">Fasting glucose: Diabetes</option>
+              <option value="right:At high risk">Fasting glucose: At high risk</option>
+              <option value="right:No diabetes">Fasting glucose: No diabetes</option>
+            </optgroup>
+          </select>
+          <button type="button" id="alluvial-reset" disabled>Reset</button>
+          <p id="alluvial-status" role="status" aria-live="polite">All displayed bands highlighted.</p>
+        </div>
+        <div id="chart-12" class="chart" role="img" aria-label="Alluvial diagram comparing HbA1c and fasting-glucose classifications. Indigo bands show the same classification; pink bands show different classifications. The 85 percent classified as no diabetes by both tests is excluded."></div><p class="chart-note">ABS comparison table, fasting-sample adults aged 18+. Shown bands total 12.8% of eligible adults. Reported pairs including the omitted 85.0% total 97.8%, not 100%; unavailable results and confidential adjustment affect totals. The 0.1% band has a high margin of error. Node heights describe only the displayed subset.</p></figure>
     </article>
     <div class="closing"><p class="eyebrow">THE TAKEAWAY</p><h2>A national condition.<br>An uneven distribution.</h2><p>Diabetes prevalence varies across age groups, population characteristics and places. Read every estimate alongside its population, period and definition.</p></div>
   </section>

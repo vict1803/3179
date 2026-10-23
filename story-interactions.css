@@ -1,0 +1,111 @@
+/* Load after style.css and chart-enhancements.css. */
+:root { --story-nav-height: 62px; }
+html { scroll-padding-top: 0; }
+.hero, .chapter, .sources { scroll-margin-top: calc(var(--story-nav-height) + 16px); }
+
+.story-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: #f5f4ee; border-bottom: 1px solid #d8dfd5;
+  box-shadow: 0 3px 12px #243d3710;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.story-nav-inner { display: flex; align-items: center; gap: 20px; min-height: 62px; }
+.story-nav-label { flex: 0 0 auto; color: #617068; font-size: 11px; }
+.story-nav-links { display: flex; gap: 5px; padding: 8px 0; overflow-x: auto; }
+.story-nav a {
+  flex: 0 0 auto; padding: 8px 12px; border-radius: 4px;
+  color: #45564e; text-decoration: none; white-space: nowrap; font-size: 12px;
+  transition: color 160ms, background-color 160ms;
+}
+.story-nav a:hover { background: #e2e9df; }
+.story-nav a[aria-current="location"] { background: #17665a; color: white; }
+.story-tools {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  margin: 10px 0 16px var(--chart-plot-inset, 0px);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.story-tools button, .map-shortcuts button, .map-dialog button {
+  background: #fffef8; border: 1px solid #aebdad;
+  border-radius: 4px; padding: 8px 12px; font: 13px Arial, sans-serif;
+  color: #243d37; cursor: pointer;
+}
+.story-tools button:hover, .map-shortcuts button:hover, .map-dialog button:hover { background: #e2e9df; }
+.story-tools button:disabled { opacity: .5; cursor: default; }
+.story-animation-status { font-size: 12px; color: #617068; }
+.waffle-revealing .mark-rect { pointer-events: none; }
+.map-shortcuts { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+.map-shortcuts button[aria-pressed="true"] { background: #17665a; border-color: #17665a; color: white; }
+.map-help { width: 100%; color: #617068; margin: 4px 0 8px; font-size: 13px; }
+.map-dialog {
+  width: min(1200px, 96vw); max-width: 96vw; max-height: 95vh;
+  border: 1px solid #aebdad; border-radius: 8px; padding: 22px;
+  color: #243d37; background: #f5f4ee;
+}
+.map-dialog::backdrop { background: #142b25b3; }
+.map-dialog-header, .map-dialog-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.map-dialog-header {
+  justify-content: space-between; margin-bottom: 14px;
+  position: sticky; top: 0; z-index: 2; background: #f5f4ee;
+}
+.map-dialog h2 { font: 24px/1.25 Arial, sans-serif; }
+.map-dialog-tools { margin: 12px 0; font-family: Arial, sans-serif; }
+.map-zoom-label { font: 13px Arial, sans-serif; min-width: 58px; text-align: center; }
+.map-stage { width: 100%; height: min(65vh, 740px); min-height: 260px; overflow: auto; border: 1px solid #d8dfd5; }
+.map-canvas { position: relative; margin: 0 auto; }
+.map-canvas > .chart { transform-origin: top left; transition: transform 260ms ease-out; }
+.map-dialog-summary { margin: 12px 0 0; font-size: 15px; line-height: 1.5; }
+.map-placeholder { display: block; }
+:is(#chart-09, #chart-10, #chart-11) svg .role-mark > :is(path, text) { cursor: pointer; }
+:is(#chart-10, #chart-11) svg .mark-text.role-mark > text { pointer-events: none; }
+.map-is-focused svg .role-mark > path[opacity="1"] { stroke: #243d37; stroke-width: 2.5px; }
+:is(#chart-09, #chart-10, #chart-11) svg .role-mark > path:hover { stroke: #243d37; stroke-width: 2.5px; }
+:is(#chart-08, #chart-09, #chart-10, #chart-11) svg :is(path, text) {
+  transition: opacity 450ms ease-in-out, fill-opacity 450ms ease-in-out,
+              stroke-opacity 450ms ease-in-out, stroke-width 180ms ease-out;
+}
+@media (max-width: 650px) {
+  .story-nav-label { display: none; }
+  .story-nav-inner { gap: 0; min-height: 52px; }
+  .story-nav-links { width: 100%; }
+  .story-nav a { padding: 8px 10px; }
+  .map-dialog { padding: 14px; }
+  .map-dialog h2 { font-size: 20px; }
+  .map-stage { height: min(50vh, 360px); min-height: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-nav a, .map-canvas > .chart,
+  :is(#chart-08, #chart-09, #chart-10, #chart-11) svg :is(path, text) { transition: none; }
+}
+@media print {
+  .story-nav, .story-tools, .map-shortcuts, .map-help, .map-dialog { display: none !important; }
+}
+
+/* Alluvial: agreement colours, persistent category selection and gentle focus changes. */
+.alluvial-key, .alluvial-controls {
+  margin: 10px 0 14px var(--chart-plot-inset, 0px);
+  font: 12px/1.5 Arial, Helvetica, sans-serif;
+  color: #45564e;
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+}
+.alluvial-key span { display: inline-flex; align-items: center; gap: 7px; }
+.alluvial-swatch { display: inline-block; width: 16px; height: 12px; border-radius: 2px; }
+.agreement-same { background: #5261a6; }
+.agreement-different { background: #c65c86; }
+.alluvial-controls select {
+  width: auto; min-width: 0; max-width: 100%; flex: 1 1 190px;
+  margin: 0; padding: 8px; font: 13px Arial, sans-serif;
+}
+.alluvial-controls button {
+  padding: 8px 12px; border: 1px solid #aebdad; border-radius: 4px;
+  background: #fffef8; color: #243d37; font: 13px Arial, sans-serif; cursor: pointer;
+}
+.alluvial-controls button:disabled { opacity: .5; cursor: default; }
+.alluvial-controls :is(button, select):focus-visible { outline: 2px solid #5261a6; outline-offset: 3px; }
+.alluvial-controls #alluvial-status { flex-basis: 100%; margin: 0; font: 12px/1.5 Arial, sans-serif; }
+#chart-12 svg :is(.flowBands, .categoryNodes, .categoryLabels) > * {
+  transition: opacity 220ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  #chart-12 svg :is(.flowBands, .categoryNodes, .categoryLabels) > * { transition: none; }
+}
+@media print { .alluvial-controls { display: none; } }

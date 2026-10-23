@@ -28,15 +28,23 @@ def stateparams(s):s['params']=[dict(name='statePick',value='All')]
 def state_opacity(field='abbr'):
  return dict(condition=dict(test=f"statePick == 'All' || datum.{field} == statePick",value=1),value=.22)
 
-def main():
+def waffle_spec():
  s=base('waffle.csv',220)
- s['transform']=[dict(calculate='toNumber(datum.col)+1',**{'as':'right'}),dict(calculate='toNumber(datum.row)+1',**{'as':'bottom'})]
- s['mark']=dict(type='rect',stroke='#f5f4ee',strokeWidth=1.0,cornerRadius=1)
- s['encoding']=dict(x=Q('col',axis=None,scale=dict(domain=[0,50],nice=False)),x2=dict(field='right'),
- y=Q('row',axis=None,scale=dict(domain=[20,0],nice=False)),y2=dict(field='bottom'),
- color=dict(field='status',scale=dict(domain=['Known diabetes','Newly diagnosed diabetes','Not classified with diabetes'],range=[KNOWN,NEW,PALE]),legend=None),
- tooltip=[tip('status','Classification'),tip('cell_pct','Each square represents (%)','quantitative','.1f')])
- save('01-waffle.vl.json',s)
+ s['transform']=[dict(calculate='toNumber(datum.col)+1',**{'as':'right'}),
+                 dict(calculate='toNumber(datum.row)+1',**{'as':'bottom'})]
+ s['mark']=dict(type='rect',stroke='#f5f4ee',strokeWidth=1,cornerRadius=1)
+ s['encoding']=dict(
+  x=Q('col',axis=None,scale=dict(domain=[0,50],nice=False)),x2=dict(field='right'),
+  y=Q('row',axis=None,scale=dict(domain=[20,0],nice=False)),y2=dict(field='bottom'),
+  color=dict(field='status',type='nominal',scale=dict(
+   domain=['Known diabetes','Newly diagnosed diabetes','Not classified with diabetes'],
+   range=[KNOWN,NEW,PALE]),legend=None),
+  tooltip=[tip('status','Classification'),
+           tip('cell_pct','Each square represents (%)','quantitative','.1f')])
+ return s
+
+def main():
+ save('01-waffle.vl.json',waffle_spec())
  s=base('registered_trend.csv',340);sexparam(s)
  s['mark']=dict(type='line',strokeWidth=2.8)
  s['encoding']=dict(x=Q('year','Year',axis=dict(format='d',tickCount=6),scale=dict(nice=False)),
@@ -131,6 +139,7 @@ def main():
  {'type':'text','from':{'data':'nodes'},'encode':{'update':{'x':{'signal':"datum.side == 'left' ? lx-8 : rx+18"},'y':{'signal':'(datum.y+datum.y2)/2'},'text':{'field':'label'},'align':{'signal':"datum.side == 'left' ? 'right' : 'left'"},'baseline':{'value':'middle'},'font':{'value':'Arial'},'fontSize':{'value':11},'fill':{'value':INK}}}},
  {'type':'text','encode':{'update':{'x':{'signal':'lx'},'y':{'value':-12},'text':{'value':'HbA1c test'},'align':{'value':'center'},'font':{'value':'Arial'},'fontSize':{'value':12},'fontWeight':{'value':'bold'},'fill':{'value':INK}}}},
  {'type':'text','encode':{'update':{'x':{'signal':'rx'},'y':{'value':-12},'text':{'value':'Fasting glucose test'},'align':{'value':'center'},'font':{'value':'Arial'},'fontSize':{'value':12},'fontWeight':{'value':'bold'},'fill':{'value':INK}}}}]}
- save('12-test-classification.vg.json',s)
+ from build_alluvial import enhance_alluvial
+ save('12-test-classification.vg.json',enhance_alluvial(s))
  print('Built 11 specifications; run build_cartogram.py for chart 11 (12 charts total).')
 if __name__=='__main__':main()

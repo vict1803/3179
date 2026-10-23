@@ -41,7 +41,15 @@ No npm installation, API key, login, or external CDN is needed. Vendor JavaScrip
 
 See `docs/EDITING_GUIDE.md`. The top of `style.css` controls the heading/body fonts and spacing. In `index.html`, search for `ai-declaration-text` to edit the visible AI declaration.
 
+## Integrated update - 23 October 2026
+
+All imports and files are connected. The user's HTML/CSS comments and 1,000-square waffle are retained. The updated page includes chart alignment, a sticky section navigation with active-section tracking, gradual waffle reveal with Replay, state shortcuts, and enlarged maps with zoom, scrolling and Fit map controls. Motion respects the device's reduced-motion setting.
+
+The additional files are `chart-enhancements.css`, `story-interactions.css`, `js/chart-enhancements.js` and `js/story-interactions.js`. You do not need to merge patches. Start the server to see the interactive version; double-clicking the HTML uses static previews.
+
 ## Interactions
+
+- **Alluvial comparison:** indigo indicates matching classifications and pink indicates differences. Hover over a band, select a category or use Highlight connections; Reset restores the displayed overview.
 
 - **Trend measure:** switch between registered-person counts and age-adjusted prevalence; no misleading dual axis.
 - **Sex:** filter the historical trend, age/sex heatmap and disadvantage comparison together.
