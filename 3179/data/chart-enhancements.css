@@ -1,0 +1,59 @@
+/* Load AFTER style.css. Keep your existing stylesheet and comments. */
+
+/* JavaScript measures each SVG plot's left inset, including axis-label space. */
+.chart-block {
+  --chart-plot-inset: 0px;
+  position: relative;
+  border-top-color: transparent;
+}
+
+/* Keep the figure's rule on the same left edge as its caption and plot. */
+.chart-block::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: var(--chart-plot-inset);
+  right: 0;
+  border-top: 2px solid #9db39f;
+  pointer-events: none;
+}
+
+.chart-block > figcaption {
+  margin-left: var(--chart-plot-inset);
+}
+
+.chart-block > .chart-note {
+  margin-left: var(--chart-plot-inset);
+  max-width: min(46ch, calc(100% - var(--chart-plot-inset)));
+}
+
+/* Smooth only the opacity of marks retained during linked highlighting.
+   The SVG geometry, data values, colours and scales are unchanged. */
+:is(#chart-08, #chart-09, #chart-10, #chart-11) svg :is(path, text) {
+  transition: opacity 180ms ease-out,
+              fill-opacity 180ms ease-out,
+              stroke-opacity 180ms ease-out;
+}
+
+select,
+button {
+  transition: background-color 120ms ease-out,
+              border-color 120ms ease-out;
+}
+
+/* The user can request less motion through their device/browser settings. */
+@media (prefers-reduced-motion: reduce) {
+  :is(#chart-08, #chart-09, #chart-10, #chart-11) svg :is(path, text),
+  select,
+  button {
+    transition: none;
+  }
+}
+
+@media print {
+  :is(#chart-08, #chart-09, #chart-10, #chart-11) svg :is(path, text),
+  select,
+  button {
+    transition: none;
+  }
+}

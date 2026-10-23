@@ -6,10 +6,13 @@
   <meta name="description" content="An illustrated data story about diabetes prevalence in Australia: historical change, age, sex, disadvantage and geography.">
   <title>Diabetes in Australia — An unequal picture</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Additional chart alignment and selection transitions; keep style.css. -->
+  <link rel="stylesheet" href="chart-enhancements.css">
   <script defer src="vendor/vega.min.js"></script>
   <script defer src="vendor/vega-lite.min.js"></script>
   <script defer src="vendor/vega-embed.min.js"></script>
   <script defer src="js/app.js"></script>
+  <script defer src="js/chart-enhancements.js"></script>
 </head>
 <body>
 <a class="skip" href="#story">Skip to the data story</a>
@@ -29,6 +32,7 @@
       <div><strong>3.5<span>×</span></strong><p>the age-adjusted rate in<br>the most disadvantaged areas.*</p></div>
     </div>
     <p class="source-line">Source: AIHW, NHMS analysis, 2022–24. *Compared with the least disadvantaged areas. Figures are rounded survey estimates.</p>
+    </div><!-- end .hero-bottom -->
   </section>
 
   <section class="chapter" id="national">
