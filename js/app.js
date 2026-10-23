@@ -1,5 +1,6 @@
 /* Buildless, local-asset Vega/Vega-Lite embedding. No account or network dependency. */
 'use strict';
+/* the list of charts to create */
 const charts = [
  ['01','01-waffle.vl.json','diagnosis_status.csv'],
  ['02','02-trend.vl.json','registered_trend.csv'],
@@ -14,6 +15,7 @@ const charts = [
  ['11','11-area-cartogram.vg.json','states.csv'],
  ['12','12-test-classification.vg.json','test_classification.csv']
 ];
+/*These will remember the dashboard's current setting, views store the rendered, interactive charts using their IDs*/
 const views = new Map();
 let sex = 'All', state = 'All', metric = 'prevalence_pct';
 async function renderChart([id,file]) {
@@ -28,7 +30,9 @@ async function renderChart([id,file]) {
   if(id==='02' && metric==='estimated_people'){
    spec.encoding.y={field:'estimated_people',type:'quantitative',title:'Registered people',scale:{zero:true},axis:{format:'~s'}};
   }
-  const previous=views.get(id);if(previous)previous.finalize();
+  const previous=views.get(id);
+  /*This is where the active cleanup happens */
+  if(previous)previous.finalize();
   const result=await vegaEmbed(target,spec,{actions:false,renderer:'svg',tooltip:true,loader:vega.loader({baseURL:new URL('./',location.href).href})});
   views.set(id,result.view);
  } catch(error) {
@@ -38,6 +42,7 @@ async function renderChart([id,file]) {
  }
 }
 async function updateSignals(ids,name,value){await Promise.all(ids.map(async id=>{const view=views.get(id);if(view)await view.signal(name,value).runAsync();}));}
+/*It is to set up the dashboard */
 async function main(){
  if(location.protocol==='file:'){
   document.getElementById('file-warning').hidden=false;
