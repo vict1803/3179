@@ -45,8 +45,8 @@
       "title": "Age-adjusted (%)",
       "orient": "bottom",
       "gradientLength": 220,
-      "titleFontSize": 11,
-      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelFontSize": 12,
       "titleColor": "#45564e",
       "labelColor": "#45564e",
       "direction": "horizontal"
@@ -114,7 +114,7 @@
             "value": "Arial"
           },
           "fontSize": {
-            "value": 11
+            "value": 12
           },
           "fontWeight": {
             "value": "bold"

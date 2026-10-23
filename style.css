@@ -668,8 +668,3 @@ button:hover {
   margin:0;
   color:var(--muted);
 }
-.map-toolbar > label[for="state-filter"],
-#state-filter,
-#reset-state {
-  display: none;
-}

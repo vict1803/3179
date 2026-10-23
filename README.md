@@ -37,6 +37,10 @@ No npm installation, API key, login, or external CDN is needed. Vendor JavaScrip
 | `sketch/README.md` | Guide for your required original hand-drawn sketch |
 | `scripts/` | Reproducible extraction, geometry preparation and headless validation |
 
+## Larger typography update
+
+The final stylesheet, typography.css, increases body copy, headings, captions, controls and notes with separate mobile sizes. Chart axes and legends also use slightly larger text. It also hides the duplicate state dropdown controls while preserving the state buttons.
+
 ## Editing fonts and the AI declaration
 
 See `docs/EDITING_GUIDE.md`. The top of `style.css` controls the heading/body fonts and spacing. In `index.html`, search for `ai-declaration-text` to edit the visible AI declaration.

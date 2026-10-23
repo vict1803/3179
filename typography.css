@@ -1,0 +1,56 @@
+/* Larger reading sizes. Load last; the original commented style.css stays intact. */
+:root {
+  --story-body-size: 20px;
+  --story-caption-size: 18px;
+  --story-note-size: 16px;
+}
+body { font-size: var(--story-body-size); }
+.masthead { font-size: 13px; }
+.eyebrow { font-size: 13px; }
+h1 em { font-size: .46em; }
+.standfirst { font-size: 24px; }
+.hero-facts strong { font-size: 62px; }
+.hero-facts p { font-size: 18px; }
+.source-line { font-size: var(--story-note-size); }
+h2 { font-size: clamp(36px, 4.2vw, 52px); }
+.prose h3 { font-size: clamp(28px, 2.5vw, 32px); line-height: 1.2; }
+.prose p { font-size: var(--story-body-size); line-height: 1.62; }
+.prose .quiet { font-size: 17px; line-height: 1.6; }
+.prose .definition { font-size: 18px !important; }
+.chart-no { font-size: 12px; }
+figcaption h4 { font-size: 27px; line-height: 1.25; }
+figcaption > p { font-size: var(--story-caption-size); line-height: 1.55; }
+.chart-note { font-size: var(--story-note-size); line-height: 1.6; }
+.key-list { font-size: 17px; }
+.swatch { width: 12px; height: 12px; flex-basis: 12px; }
+.control { font-size: 14px; }
+select, button { font-size: 14px; }
+.story-nav a { font-size: 13px; }
+.story-tools button, .map-shortcuts button, .map-dialog button { font-size: 14px; }
+.story-animation-status, .map-help { font-size: 14px; }
+.map-toolbar p { font-size: 15px; }
+.alluvial-key, .alluvial-controls { font-size: 14px; }
+.alluvial-controls select, .alluvial-controls button { font-size: 14px; }
+.alluvial-controls #alluvial-status { font-size: 14px; }
+.alluvial-swatch { width: 18px; height: 14px; }
+.source-columns p, .closing p, .ai-declaration p { font-size: 18px; line-height: 1.6; }
+/* The state buttons reuse this dropdown internally; hide only its visible controls. */
+.map-toolbar > label[for="state-filter"], #state-filter, #reset-state { display: none; }
+@media (max-width: 900px) {
+  :root { --story-body-size: 19px; }
+  .prose h3 { font-size: 28px; }
+  figcaption h4 { font-size: 25px; }
+  .hero-facts strong { font-size: 52px; }
+}
+@media (max-width: 650px) {
+  :root { --story-body-size: 19px; --story-caption-size: 17px; --story-note-size: 15px; }
+  .masthead { font-size: 11px; }
+  .eyebrow { font-size: 12px; }
+  h2 { font-size: 36px; }
+  .standfirst { font-size: 22px; }
+  .hero-facts strong { font-size: 44px; }
+  .hero-facts p { font-size: 17px; }
+  .prose h3 { font-size: 28px; }
+  .prose .definition { font-size: 17px !important; }
+  figcaption h4 { font-size: 25px; }
+}

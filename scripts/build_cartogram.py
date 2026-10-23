@@ -34,13 +34,13 @@ def main():
       'signals':[{'name':'statePick','value':'All'}],
       'data':[{'name':'states','url':'data/geo/cartogram_shapes.json','format':{'type':'json'}}],
       'scales':[{'name':'rate','type':'linear','domain':[3,9],'range':['#e0e9ce','#17665a'],'zero':False}],
-      'legends':[{'fill':'rate','title':'Age-adjusted (%)','orient':'bottom','gradientLength':220,'titleFontSize':11,'labelFontSize':11,'titleColor':'#45564e','labelColor':'#45564e','direction':'horizontal'}],
+      'legends':[{'fill':'rate','title':'Age-adjusted (%)','orient':'bottom','gradientLength':220,'titleFontSize':12,'labelFontSize':12,'titleColor':'#45564e','labelColor':'#45564e','direction':'horizontal'}],
       'marks':[{'type':'path','from':{'data':'states'},'encode':{'update':{
        'path':{'field':'path'},'scaleX':{'signal':'width/1000'},'scaleY':{'signal':'width/1000'},
        'fill':{'scale':'rate','field':'prevalence_pct'},'stroke':{'value':'#f5f4ee'},'strokeWidth':{'value':1.5},
        'opacity':{'signal':"statePick == 'All' || datum.abbr == statePick ? 1 : 0.22"},
        'tooltip':{'signal':"{'State / territory':datum.state,'Estimated affected adults':format(datum.estimated_people, ',.0f'),'Age-adjusted prevalence (%)':format(datum.prevalence_pct,'.1f'),'Precision note':datum.caution}"}}}},
-      {'type':'text','from':{'data':'states'},'encode':{'update':{'x':{'signal':'datum.x*width/1000'},'y':{'signal':'datum.y*width/1000'},'text':{'field':'abbr'},'align':{'value':'center'},'baseline':{'value':'middle'},'font':{'value':'Arial'},'fontSize':{'value':11},'fontWeight':{'value':'bold'},'fill':{'signal':"datum.abbr != 'NT' && datum.prevalence_pct > 6 ? '#fff' : '#243d37'"},'opacity':{'signal':"statePick == 'All' || datum.abbr == statePick ? 1 : 0.22"}}}}]}
+      {'type':'text','from':{'data':'states'},'encode':{'update':{'x':{'signal':'datum.x*width/1000'},'y':{'signal':'datum.y*width/1000'},'text':{'field':'abbr'},'align':{'value':'center'},'baseline':{'value':'middle'},'font':{'value':'Arial'},'fontSize':{'value':12},'fontWeight':{'value':'bold'},'fill':{'signal':"datum.abbr != 'NT' && datum.prevalence_pct > 6 ? '#fff' : '#243d37'"},'opacity':{'signal':"statePick == 'All' || datum.abbr == statePick ? 1 : 0.22"}}}}]}
     (ROOT/'js/11-area-cartogram.vg.json').write_text(json.dumps(spec,indent=2))
     print('Cartogram area/count coefficient:',.07,'for all eight states; positions are schematic.')
 if __name__=='__main__':main()

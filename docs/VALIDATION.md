@@ -34,3 +34,7 @@ GitHub Pages has not been published or verified. The required original hand-draw
 ## Alluvial update — 23 October 2026
 
 All 12 charts rendered again at the default width and at 430px/290px without Vega warnings. Browser checks confirmed the two agreement colours, category-label clicks, dropdown selection on both sides, band hover and joint-percentage tooltip, endpoint highlighting, Reset, and the 220ms opacity transition. A 375px content viewport had no horizontal page overflow and the fasting-glucose selection correctly isolated two connected bands. The underlying link/node values, health data and original commented style.css were compared with the preceding ZIP and remain unchanged.
+
+## Larger typography verification — 23 October 2026
+
+All 12 charts passed the headless renderer at the default size and 430px/290px widths with no Vega warnings. Desktop browser measurements confirmed body text 20px, prose subheadings 32px, chart titles 27px and notes 16px. SVG text bounds were checked for all 12 charts at desktop and a 375px content viewport with no text outside the SVG boundaries. The narrow page content width matched its 375px viewport; body text was 19px. The hidden state dropdown and reset controls no longer appear, and the VIC state button continued to update the map summary. Original style.css comments and source health data are retained.

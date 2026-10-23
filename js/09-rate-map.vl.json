@@ -22,8 +22,8 @@
       "stroke": null
     },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 12,
+      "labelFontSize": 13,
+      "titleFontSize": 13,
       "titleFontWeight": "normal",
       "labelColor": "#45564e",
       "titleColor": "#45564e",
@@ -34,8 +34,8 @@
       "titlePadding": 12
     },
     "legend": {
-      "labelFontSize": 12,
-      "titleFontSize": 12,
+      "labelFontSize": 13,
+      "titleFontSize": 13,
       "labelColor": "#45564e",
       "titleColor": "#45564e",
       "symbolStrokeWidth": 3

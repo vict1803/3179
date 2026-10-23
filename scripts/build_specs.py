@@ -6,8 +6,8 @@ TEAL='#17665a';INK='#243d37';MALE='#376da5';FEMALE='#bd5b49';KNOWN='#715496';NEW
 AGES=['18–44','45–54','55–64','65–74','75+']
 SEX=dict(field='sex',type='nominal',scale=dict(domain=['Males','Females','Persons'],range=[MALE,FEMALE,INK]),legend=dict(title=None,orient='top'))
 CONFIG=dict(background='transparent',font='Arial',view=dict(stroke=None),
- axis=dict(labelFontSize=12,titleFontSize=12,titleFontWeight='normal',labelColor='#45564e',titleColor='#45564e',domain=False,tickColor='#c7d0c8',gridColor='#e1e6df',labelPadding=8,titlePadding=12),
- legend=dict(labelFontSize=12,titleFontSize=12,labelColor='#45564e',titleColor='#45564e',symbolStrokeWidth=3),
+ axis=dict(labelFontSize=13,titleFontSize=13,titleFontWeight='normal',labelColor='#45564e',titleColor='#45564e',domain=False,tickColor='#c7d0c8',gridColor='#e1e6df',labelPadding=8,titlePadding=12),
+ legend=dict(labelFontSize=13,titleFontSize=13,labelColor='#45564e',titleColor='#45564e',symbolStrokeWidth=3),
  title=dict(font='Arial',fontSize=19,fontWeight='normal',anchor='start',offset=18,color=INK))
 def Q(field,title=None,**kw):return dict(field=field,type='quantitative',title=title,**kw)
 def N(field,title=None,**kw):return dict(field=field,type='nominal',title=title,**kw)
@@ -136,9 +136,9 @@ def main():
  'path':{'signal':"'M'+(lx+10)+','+datum.sy+' C'+(width*0.48)+','+datum.sy+' '+(width*0.52)+','+datum.ty+' '+rx+','+datum.ty+' L'+rx+','+(datum.ty+datum.h)+' C'+(width*0.52)+','+(datum.ty+datum.h)+' '+(width*0.48)+','+(datum.sy+datum.h)+' '+(lx+10)+','+(datum.sy+datum.h)+' Z'"},
  'tooltip':{'signal':"{'HbA1c classification':datum.a,'FPG classification':datum.b,'Eligible adults (%)':datum.percent,'Reliability':datum.caution}"}},'hover':{'fill':{'value':TEAL}}}},
  {'type':'rect','from':{'data':'nodes'},'encode':{'update':{'x':{'signal':"datum.side == 'left' ? lx : rx"},'width':{'value':10},'y':{'field':'y'},'y2':{'field':'y2'},'fill':{'value':INK}}}},
- {'type':'text','from':{'data':'nodes'},'encode':{'update':{'x':{'signal':"datum.side == 'left' ? lx-8 : rx+18"},'y':{'signal':'(datum.y+datum.y2)/2'},'text':{'field':'label'},'align':{'signal':"datum.side == 'left' ? 'right' : 'left'"},'baseline':{'value':'middle'},'font':{'value':'Arial'},'fontSize':{'value':11},'fill':{'value':INK}}}},
- {'type':'text','encode':{'update':{'x':{'signal':'lx'},'y':{'value':-12},'text':{'value':'HbA1c test'},'align':{'value':'center'},'font':{'value':'Arial'},'fontSize':{'value':12},'fontWeight':{'value':'bold'},'fill':{'value':INK}}}},
- {'type':'text','encode':{'update':{'x':{'signal':'rx'},'y':{'value':-12},'text':{'value':'Fasting glucose test'},'align':{'value':'center'},'font':{'value':'Arial'},'fontSize':{'value':12},'fontWeight':{'value':'bold'},'fill':{'value':INK}}}}]}
+ {'type':'text','from':{'data':'nodes'},'encode':{'update':{'x':{'signal':"datum.side == 'left' ? lx-8 : rx+18"},'y':{'signal':'(datum.y+datum.y2)/2'},'text':{'field':'label'},'align':{'signal':"datum.side == 'left' ? 'right' : 'left'"},'baseline':{'value':'middle'},'font':{'value':'Arial'},'fontSize':{'value':12},'fill':{'value':INK}}}},
+ {'type':'text','encode':{'update':{'x':{'signal':'lx'},'y':{'value':-12},'text':{'value':'HbA1c test'},'align':{'value':'center'},'font':{'value':'Arial'},'fontSize':{'value':13},'fontWeight':{'value':'bold'},'fill':{'value':INK}}}},
+ {'type':'text','encode':{'update':{'x':{'signal':'rx'},'y':{'value':-12},'text':{'value':'Fasting glucose test'},'align':{'value':'center'},'font':{'value':'Arial'},'fontSize':{'value':13},'fontWeight':{'value':'bold'},'fill':{'value':INK}}}}]}
  from build_alluvial import enhance_alluvial
  save('12-test-classification.vg.json',enhance_alluvial(s))
  print('Built 11 specifications; run build_cartogram.py for chart 11 (12 charts total).')

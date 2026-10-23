@@ -92,3 +92,9 @@ The chart runtimes and code have been checked; the complete HTML/CSS page still 
 Chart 12 uses indigo (#5261a6) for the same classification and pink (#c65c86) for different classifications. Hovering a band highlights it and its two endpoint categories. Clicking a category or choosing it in Highlight connections keeps its displayed bands highlighted; Reset clears the selection. The dropdown provides keyboard access. Selection survives chart re-embedding after resize. Opacity changes take 220ms and respect reduced-motion settings.
 
 The chart's native Vega signals and mark encodings are in `js/12-test-classification.vg.json`; `connectAlluvialControls()` in `js/app.js` connects the HTML dropdown and Reset. The legend and controls are next to `chart-12` in `index.html`, with styling in `story-interactions.css`. `scripts/build_alluvial.py` adds the same behaviour during a specification rebuild. Source data, band geometry, percentages and the omitted 85.0% group are unchanged.
+
+## Larger typography — 23 October 2026
+
+`typography.css` is loaded last in index.html so your commented style.css remains intact. Desktop body paragraphs are 20px, prose subheadings up to 32px, chart titles 27px, subtitles 18px and chart notes 16px. Mobile body text is 19px. The variables at the start of typography.css control reading sizes; the media queries scale other headings. Chart axis/legend text is modestly larger in the individual JSON specifications.
+
+The duplicate state label, dropdown and Reset are visually hidden by the final CSS file. Their HTML remains because the existing state buttons use the select internally. All states clears highlighting.
