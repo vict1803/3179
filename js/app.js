@@ -41,7 +41,9 @@ async function renderChart([id,file]) {
   target.append(p); console.error(`Chart ${id}:`,error);
  }
 }
-async function updateSignals(ids,name,value){await Promise.all(ids.map(async id=>{const view=views.get(id);if(view)await view.signal(name,value).runAsync();}));}
+async function updateSignals(ids,name,value)
+{await Promise.all(ids.map(async id=>{const view=views.get(id);
+    if(view)await view.signal(name,value).runAsync();}));}
 /*It is to set up the dashboard */
 async function main(){
  if(location.protocol==='file:'){
