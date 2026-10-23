@@ -46,7 +46,7 @@ The `@media` rules near the end adjust the columns below 900px and stack them in
 
 Your commented `index.html` and `style.css` are retained. The HTML loads two additional stylesheets and scripts after the existing project files. Keep that order:
 
-- `chart-enhancements.css` and `js/chart-enhancements.js` align captions and notes with the rendered chart plot, including after resize or re-embedding.
+- `chart-enhancements.css` aligns captions, rules, controls, full SVG canvases and notes with the shared HTML chart-column edge. `js/chart-enhancements.js` clears legacy offsets; it no longer moves captions according to each chart’s axes. Internal axis spacing remains inside each SVG.
 - `story-interactions.css` and `js/story-interactions.js` provide the sticky section navigation, active-section tracking, waffle reveal/replay, state buttons and enlarged map dialog.
 
 The waffle retains 1,000 squares in a 50-by-20 grid. Each square is 0.1 percentage point: 56 known diabetes, 9 newly diagnosed and 935 not classified with diabetes. Its data is in `data/processed/waffle.csv`; its specification is `js/01-waffle.vl.json`. `waffle_rows()` and `waffle_spec()` reproduce this version. No square-height override is needed in `app.js`.
@@ -98,3 +98,35 @@ The chart's native Vega signals and mark encodings are in `js/12-test-classifica
 `typography.css` is loaded last in index.html so your commented style.css remains intact. Desktop body paragraphs are 20px, prose subheadings up to 32px, chart titles 27px, subtitles 18px and chart notes 16px. Mobile body text is 19px. The variables at the start of typography.css control reading sizes; the media queries scale other headings. Chart axis/legend text is modestly larger in the individual JSON specifications.
 
 The duplicate state label, dropdown and Reset are visually hidden by the final CSS file. Their HTML remains because the existing state buttons use the select internally. All states clears highlighting.
+
+## Title hierarchy and paragraph accents — 23 October 2026
+
+The final block in `typography.css` controls the main title (up to 120px), section titles (up to 64px), and responsive mobile sizes (54px main title, 40px sections at the checked narrow width). Main heading and section titles stay sans-serif; paragraphs remain Times New Roman.
+
+Plum highlights numerical findings (`strong`, with optional `key-stat` soft shading). Teal marks reading concepts (`key-term`). Amber marks interpretation cautions (`reading-caution`). `diagnosis-known` and `diagnosis-new` correspond to the waffle's purple/gold categories, using a darker gold for readable paragraph text. Edit the named CSS classes on the relevant phrases in index.html. Highlights preserve the page wording and every chart's data/colour encodings.
+
+## Shared chart edges and section accents — 23 October 2026
+
+Every figure now starts its caption, rule, controls and notes at its chart-column edge. The old per-plot offset measurement caused headings to stagger between charts with different axes and has been removed. The waffle also has zero outer Vega padding, bringing its first square to the caption edge apart from its small stroke/corner treatment. Other charts reserve the internal room needed for their axes.
+
+The final block of typography.css sets section accents: National teal; Age & sex slate blue; Disparities plum; Maps olive; Measurement bronze. These decorate section badges, eyebrow labels, chart identifiers, divider lines and the active navigation tab. Text and chart marks retain their existing colour meanings. Change each section’s `--chapter-accent`, `--chapter-line` and `--chapter-wash` variables to adjust the theme.
+
+## Waffle first-entry autoplay fix — 23 October 2026
+
+Only js/story-interactions.js changes at runtime. The earlier IntersectionObserver thresholds could fire before the 85%-of-viewport start gate and miss the gate during slow scrolling. A passive scroll listener now schedules a visibility check using requestAnimationFrame. The code also waits for non-empty square marks with positive layout bounds, checks page visibility, and marks the first reveal complete only when it finishes. A replaced SVG can therefore retry if a resize interrupts the first reveal. Replay is retained; reduced-motion preferences show the full chart without animation.
+
+To update an existing copy, replace js/story-interactions.js from this ZIP and hard-refresh the browser. Use a local HTTP server or VS Code Live Server for interactive behaviour; file:// uses static previews.
+
+## Historical line reveal — 23 October 2026
+
+Chart 02 now draws from left to right on first visible entry. `playTrend()` in js/story-interactions.js temporarily clips only the line mark groups, expanding the horizontal reveal across the year axis over a nominal 2400ms. Axes and legends remain visible. All three series share the same progress. Replay trend restarts it; switching between rate and count waits for the new Vega SVG, then reveals that measure. Sex filtering and existing tooltips are preserved. Completed clips are removed. Reduced-motion preferences show the full chart immediately.
+
+To apply this update to your current folder, replace only js/story-interactions.js from the new ZIP and hard-refresh. All earlier layout, colour and waffle autoplay fixes are included.
+
+## Connected story and section takeaways
+
+For this final narrative update, replace `index.html` and `typography.css` from the new ZIP if you already have the preceding version. No additional runtime files are required.
+
+In `index.html`, `.standfirst` introduces the central question. Each `.chapter-intro` frames a section. Each `.section-takeaway` contains its insight in `.takeaway-text`; the first four also contain a `.takeaway-next` transition. The `.closing` block before Sources brings the findings together. Edit the words inside these elements, keeping the surrounding tags. The last block of `typography.css` controls their spacing, colour and responsive sizes.
+
+`docs/STORYLINE.md` records the intended sequence. Keep registrations separate from survey estimates, distinguish counts from prevalence, and retain uncertainty and coverage notes when editing. All earlier HTML comments and the original commented `style.css` are preserved.

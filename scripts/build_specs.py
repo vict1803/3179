@@ -29,7 +29,7 @@ def state_opacity(field='abbr'):
  return dict(condition=dict(test=f"statePick == 'All' || datum.{field} == statePick",value=1),value=.22)
 
 def waffle_spec():
- s=base('waffle.csv',220)
+ s=base('waffle.csv',220);s['padding']=0
  s['transform']=[dict(calculate='toNumber(datum.col)+1',**{'as':'right'}),
                  dict(calculate='toNumber(datum.row)+1',**{'as':'bottom'})]
  s['mark']=dict(type='rect',stroke='#f5f4ee',strokeWidth=1,cornerRadius=1)

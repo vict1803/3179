@@ -51,6 +51,16 @@ All imports and files are connected. The user's HTML/CSS comments and 1,000-squa
 
 The additional files are `chart-enhancements.css`, `story-interactions.css`, `js/chart-enhancements.js` and `js/story-interactions.js`. You do not need to merge patches. Start the server to see the interactive version; double-clicking the HTML uses static previews.
 
+## Alignment and section colours
+
+All chart captions, controls, canvases and notes share one chart-column edge. Five muted section accents help readers track the story; data palettes remain consistent. These styles are in chart-enhancements.css and the final block of typography.css.
+
+## Connected storyline
+
+The page moves from national scale and historical change, to age and sex, differences beyond age, geography, and measurement. Each chapter has a short introduction and takeaway; four transition questions link the chapters. The final conclusion explains that prevalence varies across populations and that fair comparisons require attention to age, counts versus percentages, definitions and uncertainty.
+
+This narrative update changes only `index.html` and `typography.css` on the running page. Existing data, chart specifications, comments and interactions are retained. See `docs/STORYLINE.md` for the outline and `docs/EDITING_GUIDE.md` for editing locations.
+
 ## Interactions
 
 - **Alluvial comparison:** indigo indicates matching classifications and pink indicates differences. Hover over a band, select a category or use Highlight connections; Reset restores the displayed overview.

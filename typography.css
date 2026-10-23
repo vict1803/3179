@@ -54,3 +54,138 @@ select, button { font-size: 14px; }
   .prose .definition { font-size: 17px !important; }
   figcaption h4 { font-size: 25px; }
 }
+
+/* Title hierarchy and selective editorial colour. Chart palettes stay unchanged. */
+:root {
+  --text-stat: #7b365d;
+  --text-stat-wash: #f0e3eb;
+  --text-caution: #805812;
+  --text-caution-wash: #f3ead4;
+}
+.hero h1 {
+  font-size: clamp(54px, 9.2vw, 120px);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -.045em;
+}
+.hero h1 em {
+  font-size: clamp(22px, 3.4vw, 42px);
+  font-weight: 400;
+  line-height: 1.25;
+}
+.chapter-heading > div { min-width: 0; }
+.chapter-heading h2, .sources > h2 {
+  font-size: clamp(40px, 4.8vw, 64px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.closing h2 { font-size: clamp(38px, 4.2vw, 56px); }
+/* Plum marks numerical findings; teal marks definitions and reading concepts. */
+.prose strong { color: var(--text-stat); }
+.prose .key-stat {
+  background: var(--text-stat-wash);
+  padding: .02em .16em;
+  border-radius: 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.prose .key-term, .prose .definition b { color: var(--teal); font-weight: 700; }
+/* These two terms use the same diagnosis colours as the waffle legend. */
+.prose .diagnosis-known { color: var(--known); font-weight: 700; }
+.prose .diagnosis-new { color: #805c16; font-weight: 700; }
+.prose .reading-caution {
+  color: var(--text-caution);
+  background: var(--text-caution-wash);
+  padding: .02em .14em;
+  font-weight: 700;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+@media (max-width: 650px) {
+  .hero h1 { font-size: clamp(54px, 10.5vw, 68px); }
+  .chapter-heading h2, .sources > h2 { font-size: 40px; }
+  .closing h2 { font-size: 38px; }
+}
+
+/* Section accents help navigation; they do not encode chart data. */
+#national { --chapter-accent: #17665a; --chapter-line: #bad0c7; --chapter-wash: #e8f0eb; }
+#people { --chapter-accent: #3f607a; --chapter-line: #c0ced9; --chapter-wash: #eaf0f5; }
+#inequality { --chapter-accent: #7b365d; --chapter-line: #d8c0cf; --chapter-wash: #f3e9ef; }
+#geography { --chapter-accent: #5f6e3f; --chapter-line: #cbd1bb; --chapter-wash: #edf0e5; }
+#measurement { --chapter-accent: #936031; --chapter-line: #d9c6b6; --chapter-wash: #f5ede4; }
+.chapter { border-top-color: var(--chapter-line, var(--rule)); }
+.chapter > .chapter-heading .eyebrow,
+.chapter .chart-no { color: var(--chapter-accent, var(--teal)); }
+.chapter-number {
+  color: var(--chapter-accent, var(--teal));
+  background: var(--chapter-wash, #e8f0eb);
+  border: 1px solid var(--chapter-line, var(--rule));
+  border-radius: 5px;
+  min-width: 48px;
+  padding: 10px 8px;
+  text-align: center;
+}
+.chapter .chart-block::before { border-top-color: var(--chapter-line, #9db39f); }
+.story-nav a[href="#people"][aria-current="location"] { background: #3f607a; }
+.story-nav a[href="#inequality"][aria-current="location"] { background: #7b365d; }
+.story-nav a[href="#geography"][aria-current="location"] { background: #5f6e3f; }
+.story-nav a[href="#measurement"][aria-current="location"] { background: #936031; }
+@media (max-width: 650px) {
+  .chapter-number { min-width: 42px; padding: 9px 6px; font-size: 23px; }
+}
+
+/* Chapter introductions and closing insights create one connected data story. */
+.chapter-intro {
+  margin: 18px 0 0;
+  max-width: 52ch;
+  font: 20px/1.55 var(--font-body);
+  letter-spacing: normal;
+  color: #45564e;
+}
+.section-takeaway {
+  margin: -18px 0 35px;
+  padding: 22px 26px;
+  border-left: 4px solid var(--chapter-accent, var(--teal));
+  background: var(--chapter-wash, #e8f0eb);
+  border-radius: 0 6px 6px 0;
+}
+.takeaway-label {
+  margin: 0 0 10px;
+  font: 700 12px/1.4 var(--font-heading);
+  letter-spacing: .12em;
+  color: var(--chapter-accent, var(--teal));
+}
+.takeaway-text {
+  margin: 0;
+  max-width: 62ch;
+  font: 22px/1.5 var(--font-body);
+  color: var(--ink);
+}
+.takeaway-next {
+  margin: 14px 0 0;
+  max-width: 60ch;
+  font: 18px/1.5 var(--font-body);
+  color: #45564e;
+}
+.takeaway-next span {
+  margin-right: 8px;
+  font: 700 12px/1.4 var(--font-heading);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--chapter-accent, var(--teal));
+}
+.closing p {
+  max-width: 52ch;
+  margin: 22px 0 0;
+  font-size: 20px;
+  line-height: 1.6;
+}
+.closing p:last-child { max-width: 52ch; font-size: 20px; }
+.closing strong { color: var(--ink); }
+@media (max-width: 650px) {
+  .chapter-intro { font-size: 19px; }
+  .section-takeaway { margin-top: -10px; padding: 19px 20px; }
+  .takeaway-text { font-size: 20px; }
+  .takeaway-next { font-size: 17px; }
+  .closing p, .closing p:last-child { font-size: 19px; }
+}

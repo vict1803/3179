@@ -7,7 +7,7 @@
     "contains": "padding",
     "resize": true
   },
-  "padding": 12,
+  "padding": 0,
   "data": {
     "url": "data/processed/waffle.csv",
     "format": {

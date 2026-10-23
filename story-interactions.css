@@ -21,7 +21,7 @@ html { scroll-padding-top: 0; }
 .story-nav a[aria-current="location"] { background: #17665a; color: white; }
 .story-tools {
   display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-  margin: 10px 0 16px var(--chart-plot-inset, 0px);
+  margin: 10px 0 16px 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 .story-tools button, .map-shortcuts button, .map-dialog button {
@@ -82,7 +82,7 @@ html { scroll-padding-top: 0; }
 
 /* Alluvial: agreement colours, persistent category selection and gentle focus changes. */
 .alluvial-key, .alluvial-controls {
-  margin: 10px 0 14px var(--chart-plot-inset, 0px);
+  margin: 10px 0 14px 0;
   font: 12px/1.5 Arial, Helvetica, sans-serif;
   color: #45564e;
   display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;

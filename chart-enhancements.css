@@ -1,30 +1,30 @@
 /* Load AFTER style.css. Keep your existing stylesheet and comments. */
 
-/* JavaScript measures each SVG plot's left inset, including axis-label space. */
+/* All figures share the HTML chart-column edge. Axis spacing stays inside SVG. */
 .chart-block {
   --chart-plot-inset: 0px;
   position: relative;
   border-top-color: transparent;
 }
 
-/* Keep the figure's rule on the same left edge as its caption and plot. */
+/* Keep captions, the full SVG canvas, controls, notes and rules on one edge. */
 .chart-block::before {
   content: "";
   position: absolute;
   top: -2px;
-  left: var(--chart-plot-inset);
+  left: 0;
   right: 0;
   border-top: 2px solid #9db39f;
   pointer-events: none;
 }
 
 .chart-block > figcaption {
-  margin-left: var(--chart-plot-inset);
+  margin-left: 0;
 }
 
 .chart-block > .chart-note {
-  margin-left: var(--chart-plot-inset);
-  max-width: min(46ch, calc(100% - var(--chart-plot-inset)));
+  margin-left: 0;
+  max-width: min(46ch, 100%);
 }
 
 /* Smooth only the opacity of marks retained during linked highlighting.

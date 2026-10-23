@@ -67,7 +67,8 @@
     window.addEventListener('scroll', scheduleNav, {passive: true});
     window.addEventListener('resize', scheduleNav); updateNav();
 
-    // Reveal the waffle row by row, once on entry. A clip avoids 1,000 separate animations.
+    // Reveal the waffle once on first visible entry; Replay can restart it.
+    // Scroll checks use the same viewport boundary as the visibility test.
     const waffle = document.getElementById('chart-01');
     let wafflePlayed = false, waffleFrame = 0, cleanWaffle = () => {};
     if (waffle) {
@@ -75,11 +76,29 @@
       const status = element('span', 'story-animation-status'); status.setAttribute('role', 'status');
       const replay = button('Replay waffle', playWaffle); replay.disabled = true;
       tools.append(replay, status); waffle.before(tools);
+      let checkFrame = 0, playing = false;
+
+      function readyWaffle() {
+        const svg = waffle.querySelector('svg');
+        const marks = svg && svg.querySelector('.mark-rect');
+        if (!marks || !marks.querySelector('path, rect')) return null;
+        const bounds = marks.getBBox();
+        // Vega can create its SVG group before the squares have been laid out.
+        if (bounds.width <= 0 || bounds.height <= 0) return null;
+        return {svg, marks, bounds};
+      }
+      function scheduleWaffleCheck() {
+        if (!checkFrame) checkFrame = requestAnimationFrame(observeWaffle);
+      }
       function playWaffle() {
         cancelAnimationFrame(waffleFrame); cleanWaffle();
-        const svg = waffle.querySelector('svg'), marks = svg && svg.querySelector('.mark-rect');
-        if (!marks || reduced.matches) { status.textContent = reduced.matches ? 'Full chart shown; reduced motion enabled.' : ''; return; }
-        const ns = 'http://www.w3.org/2000/svg', bounds = marks.getBBox();
+        const ready = readyWaffle();
+        if (!ready || reduced.matches) {
+          status.textContent = reduced.matches ? 'Full population shown; reduced motion enabled.' : '';
+          return;
+        }
+        const {svg, marks, bounds} = ready;
+        const ns = 'http://www.w3.org/2000/svg';
         const defs = document.createElementNS(ns, 'defs'); defs.setAttribute('data-story-overlay', 'true');
         const clip = document.createElementNS(ns, 'clipPath');
         clip.id = 'story-waffle-clip'; clip.setAttribute('clipPathUnits', 'userSpaceOnUse');
@@ -88,34 +107,178 @@
         rect.setAttribute('width', bounds.width); rect.setAttribute('height', '0');
         clip.append(rect); defs.append(clip); svg.prepend(defs);
         const previous = marks.getAttribute('clip-path'); marks.setAttribute('clip-path', 'url(#story-waffle-clip)');
-        waffle.classList.add('waffle-revealing'); status.textContent = 'Revealing the full population…'; wafflePlayed = true;
+        playing = true;
+        waffle.classList.add('waffle-revealing'); status.textContent = 'Revealing the full population…';
         cleanWaffle = () => {
           if (previous === null) marks.removeAttribute('clip-path'); else marks.setAttribute('clip-path', previous);
-          defs.remove(); waffle.classList.remove('waffle-revealing'); cleanWaffle = () => {};
+          defs.remove(); waffle.classList.remove('waffle-revealing'); playing = false; cleanWaffle = () => {};
         };
         let began;
         function step(time) {
-          if (!svg.isConnected || reduced.matches) { cleanWaffle(); status.textContent = ''; return; }
+          // A resize can replace Vega's SVG. Retry with the new chart if its
+          // first reveal was interrupted, instead of consuming the autoplay.
+          if (!svg.isConnected || reduced.matches) {
+            cleanWaffle();
+            status.textContent = reduced.matches ? 'Full population shown; reduced motion enabled.' : '';
+            scheduleWaffleCheck();
+            return;
+          }
           if (began === undefined) began = time;
           const progress = Math.min(1, (time - began) / 1800);
           rect.setAttribute('height', bounds.height * Math.floor(progress * 20) / 20);
           if (progress < 1) waffleFrame = requestAnimationFrame(step);
-          else { cleanWaffle(); status.textContent = 'Full population shown.'; }
+          else { wafflePlayed = true; cleanWaffle(); status.textContent = 'Full population shown.'; }
         }
         waffleFrame = requestAnimationFrame(step);
       }
-      const observeWaffle = () => {
-        replay.disabled = !waffle.querySelector('svg .mark-rect');
-        if (!wafflePlayed && !replay.disabled && !reduced.matches) {
-          const rect = waffle.getBoundingClientRect();
-          if (rect.top < innerHeight * .85 && rect.bottom > nav.offsetHeight) playWaffle();
+      function observeWaffle() {
+        checkFrame = 0;
+        const ready = readyWaffle();
+        replay.disabled = !ready || reduced.matches;
+        if (reduced.matches) {
+          if (playing) { cancelAnimationFrame(waffleFrame); cleanWaffle(); }
+          if (ready) status.textContent = 'Full population shown; reduced motion enabled.';
+          return;
         }
-      };
-      new IntersectionObserver(observeWaffle, {threshold: [.1, .3]}).observe(waffle);
+        if (!wafflePlayed && !playing && ready && document.visibilityState === 'visible') {
+          const rect = waffle.getBoundingClientRect();
+          const viewportHeight = document.documentElement.clientHeight || innerHeight;
+          if (rect.top < viewportHeight * .85 && rect.bottom > nav.getBoundingClientRect().bottom) playWaffle();
+        }
+      }
+      // Earlier thresholds (.1/.3) fired before the 85%-of-viewport gate,
+      // then never fired at that gate. Scroll + rAF catches the actual crossing.
+      window.addEventListener('scroll', () => {
+        if (!wafflePlayed && !playing) scheduleWaffleCheck();
+      }, {passive: true});
+      window.addEventListener('resize', scheduleWaffleCheck);
+      document.addEventListener('visibilitychange', scheduleWaffleCheck);
+      reduced.addEventListener('change', scheduleWaffleCheck);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(scheduleWaffleCheck, {threshold: [0, .25, .5, .75, 1]}).observe(waffle);
+      }
       new MutationObserver(records => {
-        if (records.some(record => !record.target.closest?.('[data-story-overlay]'))) observeWaffle();
+        if (records.some(record => !record.target.closest?.('[data-story-overlay]'))) scheduleWaffleCheck();
       }).observe(waffle, {childList: true, subtree: true});
-      observeWaffle();
+      scheduleWaffleCheck();
+    }
+
+    // Historical trend: reveal the existing line marks from 2000 to 2021.
+    // Axes and legends stay visible, and data coordinates are never changed.
+    const trend = document.getElementById('chart-02');
+    if (trend) {
+      const tools = element('div', 'story-tools');
+      const status = element('span', 'story-animation-status'); status.setAttribute('role', 'status');
+      const replay = button('Replay trend', playTrend); replay.disabled = true;
+      tools.append(replay, status); trend.before(tools);
+      let played = false, playing = false, animationFrame = 0, checkFrame = 0;
+      let cleanTrend = () => {}, activeSVG = null, activeGroups = [], waitingForSVG = null;
+
+      function readyTrend() {
+        const svg = trend.querySelector('svg');
+        if (!svg || svg === waitingForSVG) return null;
+        const groups = Array.from(svg.querySelectorAll('.mark-line'))
+          .filter(group => group.querySelector('path'));
+        if (!groups.length) return null;
+        const boxes = groups.map(group => group.getBBox());
+        if (boxes.some(box => box.width <= 0)) return null;
+        waitingForSVG = null;
+        return {svg, groups, boxes};
+      }
+      function scheduleTrendCheck() {
+        if (!checkFrame) checkFrame = requestAnimationFrame(observeTrend);
+      }
+      function stopTrend() {
+        cancelAnimationFrame(animationFrame); cleanTrend();
+      }
+      function playTrend() {
+        stopTrend();
+        const ready = readyTrend();
+        if (!ready || reduced.matches) {
+          status.textContent = reduced.matches ? 'Full trend shown; reduced motion enabled.' : '';
+          return;
+        }
+        const {svg, groups, boxes} = ready;
+        const ns = 'http://www.w3.org/2000/svg';
+        const defs = document.createElementNS(ns, 'defs'); defs.setAttribute('data-story-overlay', 'true');
+        const clips = groups.map((group, index) => {
+          const box = boxes[index];
+          const clip = document.createElementNS(ns, 'clipPath');
+          clip.id = `story-trend-clip-${index}`; clip.setAttribute('clipPathUnits', 'userSpaceOnUse');
+          const rect = document.createElementNS(ns, 'rect');
+          // Small margins retain the line stroke at its endpoints.
+          rect.setAttribute('x', box.x - 4); rect.setAttribute('y', box.y - 8);
+          rect.setAttribute('height', box.height + 16); rect.setAttribute('width', '0');
+          clip.append(rect); defs.append(clip);
+          const previous = group.getAttribute('clip-path');
+          group.setAttribute('clip-path', `url(#${clip.id})`);
+          return {group, previous, rect, width: box.width + 8};
+        });
+        svg.prepend(defs);
+        activeSVG = svg; activeGroups = groups; playing = true;
+        trend.classList.add('trend-revealing'); status.textContent = 'Drawing the historical trend, 2000–2021…';
+        cleanTrend = () => {
+          for (const {group, previous} of clips) {
+            if (previous === null) group.removeAttribute('clip-path'); else group.setAttribute('clip-path', previous);
+          }
+          defs.remove(); trend.classList.remove('trend-revealing'); playing = false;
+          activeSVG = null; activeGroups = []; cleanTrend = () => {};
+        };
+        let began;
+        function step(time) {
+          if (!svg.isConnected || groups.some(group => !group.isConnected) || reduced.matches) {
+            cleanTrend(); scheduleTrendCheck(); return;
+          }
+          if (began === undefined) began = time;
+          // Linear horizontal progress follows the chart's year axis.
+          const progress = Math.min(1, (time - began) / 2400);
+          for (const clip of clips) clip.rect.setAttribute('width', clip.width * progress);
+          if (progress < 1) animationFrame = requestAnimationFrame(step);
+          else { played = true; cleanTrend(); status.textContent = 'Full historical trend shown.'; }
+        }
+        animationFrame = requestAnimationFrame(step);
+      }
+      function observeTrend() {
+        checkFrame = 0;
+        const ready = readyTrend(); replay.disabled = !ready || reduced.matches;
+        if (reduced.matches) {
+          if (playing) stopTrend();
+          if (ready) status.textContent = 'Full trend shown; reduced motion enabled.';
+          return;
+        }
+        if (playing) {
+          // A filter or resize can replace line groups during a reveal.
+          if (!ready || ready.svg !== activeSVG || ready.groups.length !== activeGroups.length ||
+              ready.groups.some((group, index) => group !== activeGroups[index])) {
+            stopTrend(); scheduleTrendCheck();
+          }
+          return;
+        }
+        if (!played && ready && document.visibilityState === 'visible') {
+          const box = trend.getBoundingClientRect();
+          const viewportHeight = document.documentElement.clientHeight || innerHeight;
+          if (box.top < viewportHeight * .85 && box.bottom > nav.getBoundingClientRect().bottom) playTrend();
+        }
+      }
+      window.addEventListener('scroll', () => {
+        if (!played && !playing) scheduleTrendCheck();
+      }, {passive: true});
+      window.addEventListener('resize', scheduleTrendCheck);
+      document.addEventListener('visibilitychange', scheduleTrendCheck);
+      reduced.addEventListener('change', scheduleTrendCheck);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(scheduleTrendCheck, {threshold: [0, .25, .5, .75, 1]}).observe(trend);
+      }
+      new MutationObserver(records => {
+        if (records.some(record => !record.target.closest?.('[data-story-overlay]'))) scheduleTrendCheck();
+      }).observe(trend, {childList: true, subtree: true});
+      // A different measure creates a new SVG. Wait for it before replaying,
+      // rather than briefly animating the outgoing rate/count chart.
+      document.getElementById('trend-mode')?.addEventListener('change', () => {
+        waitingForSVG = trend.querySelector('svg'); played = false; stopTrend();
+        replay.disabled = true; status.textContent = 'Updating the historical trend…'; scheduleTrendCheck();
+      });
+      scheduleTrendCheck();
     }
 
     // State shortcuts reuse the existing dropdown and its linked-map handlers.
